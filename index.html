@@ -151,6 +151,25 @@
   .btn-ghost:hover{background:var(--violet-50);}
   .btn-small{padding:7px 14px; font-size:.82rem;}
 
+  /* ========== Boutons de partage ========== */
+  .share-btn {
+    display:inline-flex; align-items:center; justify-content:center; flex-direction:column;
+    padding:12px 16px; border-radius:8px; border:1px solid #ddd; cursor:pointer;
+    font-family:inherit; font-weight:600; font-size:.9rem; transition:all 0.2s;
+    background:white; color:#333; min-height:48px;
+  }
+  .share-btn:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+  .whatsapp-btn { border-color:#25d366; color:#25d366; }
+  .whatsapp-btn:hover { background:#25d366; color:white; }
+  .facebook-btn { border-color:#1877f2; color:#1877f2; }
+  .facebook-btn:hover { background:#1877f2; color:white; }
+  .twitter-btn { border-color:#1da1f2; color:#1da1f2; }
+  .twitter-btn:hover { background:#1da1f2; color:white; }
+  .email-btn { border-color:#666; color:#666; }
+  .email-btn:hover { background:#666; color:white; }
+  .copy-btn { border-color:var(--violet-600); color:var(--violet-600); }
+  .copy-btn:hover { background:var(--violet-600); color:white; }
+
   .menu-toggle{display:none; background:none; border:2px solid var(--violet-200); border-radius:8px; padding:8px 10px;}
 
   /* ---------- Hero ---------- */
@@ -171,7 +190,7 @@
     padding:6px 14px; border-radius:999px; font-weight:700; font-size:.8rem; letter-spacing:.04em; text-transform:uppercase;
     margin-bottom:16px;
   }
-  .eyebrow::before{content:''; width:7px; height:7px; border-radius:50%; background:var(--violet-600);}
+  .eyebrow::before{display:none;}
   .hero h1{font-size:clamp(2rem,4vw,3.1rem); max-width:14ch;}
   .hero h1 em{font-style:normal; color:var(--violet-600);}
   .hero p.lede{font-size:1.1rem; color:var(--ink-soft); max-width:46ch; margin-bottom:28px;}
@@ -272,6 +291,7 @@
     background:var(--violet-50); border:1px solid var(--violet-100); border-radius:8px; padding:8px 10px; font-size:.85rem;
     cursor:pointer; color:var(--violet-800); font-weight:700; display:inline-flex; align-items:center; gap:6px;
   }
+  .icon-btn svg{width:1em; height:1em; flex-shrink:0;}
   .icon-btn:hover{background:var(--violet-100);}
 
   .empty-state{
@@ -292,7 +312,8 @@
 
   /* ---------- Newsletter ---------- */
   .newsletter{background:var(--violet-50); border-radius:24px; padding:40px; text-align:center;}
-  .newsletter form{display:flex; gap:10px; justify-content:center; margin-top:20px; flex-wrap:wrap;}
+  .newsletter form{display:flex; gap:10px; justify-content:center; margin-top:20px; flex-wrap:wrap; align-items:center;}
+  .newsletter-label{font-weight:700; color:var(--violet-800); display:inline-flex; align-items:center; margin:0;}
   .newsletter input[type="email"]{
     border:2px solid var(--violet-200); border-radius:999px; padding:12px 18px; font-family:inherit; min-width:280px; font-size:.95rem;
   }
@@ -345,6 +366,7 @@
     .hero-stats{gap:18px;}
     .header-actions .btn span.label{display:none;}
   }
+   
 </style>
 </head>
 <body>
@@ -424,6 +446,7 @@
       </div>
 
       <div class="hero-visual">
+        <img src="images/Personagem_de_desenho_animado_homem_cadeira_de_rodas___Vetor_Premium-removebg-preview (1).png" alt="Illustration : personne en fauteuil roulant - personnage dessiné illustrant l'accessibilité et l'inclusion" style="max-width:100%; height:auto; margin-bottom:24px; border-radius:8px;">
         <h2>Explorer par thématique</h2>
         <div class="theme-chip-grid" aria-hidden="true">
           <div class="theme-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Handicap moteur</div>
@@ -499,7 +522,7 @@
         <h2>Restez informé·e des nouveautés</h2>
         <p>Recevez les nouvelles ressources et actualités sur le handicap et l'accessibilité, une fois par mois.</p>
         <form id="newsletterForm">
-          <label class="sr-live" for="newsletterEmail">Adresse e-mail</label>
+          <label class="newsletter-label" for="newsletterEmail">Adresse e-mail</label>
           <input type="email" id="newsletterEmail" placeholder="votre@email.com" required>
           <button class="btn btn-primary" type="submit">S'inscrire</button>
         </form>
@@ -518,7 +541,7 @@
           <span class="logo-text" style="color:white;">Inclusif<span style="color:var(--violet-400);">Connect</span></span>
       </div>
       <p style="color:var(--violet-200); font-size:.88rem; max-width:32ch;">La plateforme francophone qui réunit les ressources sur le handicap et l'accessibilité.</p>
-      <span class="rgaa-tag">✓ Conforme RGAA / WCAG</span>
+      <span class="rgaa-tag">Conforme RGAA / WCAG</span>
     </div>
     <div>
       <h4>Explorer</h4>
@@ -577,18 +600,18 @@
   ];
 
   const DOCS = [
-    {id:1, title:"Guide pratique de l'accessibilité numérique RGAA", type:"Guide", cat:"numerique", author:"Équipe Inclusif Connect", date:"2026-06-12", pop:98, kw:["RGAA","web","normes"]},
-    {id:2, title:"Comprendre les troubles DYS en milieu scolaire", type:"Document", cat:"cognitif", author:"C. Amoussou", date:"2026-05-28", pop:76, kw:["dys","école","cognitif"]},
-    {id:3, title:"Vidéo : se déplacer en fauteuil roulant en ville", type:"Vidéo", cat:"moteur", author:"Réseau Mobilité+", date:"2026-04-15", pop:64, kw:["mobilité","fauteuil","ville"]},
-    {id:4, title:"Initiation à la langue des signes (podcast)", type:"Audio", cat:"sensoriel", author:"Association Signes &amp; Voix", date:"2026-07-02", pop:53, kw:["LSF","audition"]},
-    {id:5, title:"Loi sur l'accessibilité des ERP : ce qu'il faut savoir", type:"Document", cat:"loi", author:"Ministère des Solidarités", date:"2026-03-20", pop:120, kw:["loi","ERP","droit"]},
-    {id:6, title:"Aménager un bâtiment accessible : guide technique", type:"Guide", cat:"batiments", author:"Ordre des architectes", date:"2026-02-18", pop:41, kw:["bâtiment","normes","travaux"]},
-    {id:7, title:"Créer des documents accessibles avec Word", type:"Guide", cat:"numerique", author:"Équipe Inclusif Connect", date:"2026-07-20", pop:88, kw:["bureautique","word","numérique"]},
-    {id:8, title:"Vidéo pédagogique : le braille au quotidien", type:"Vidéo", cat:"sensoriel", author:"Institut Louis Braille", date:"2026-01-30", pop:59, kw:["braille","vision"]},
-    {id:9, title:"Outils numériques pour l'apprentissage inclusif", type:"Document", cat:"apprentissage", author:"F. Konaté", date:"2026-06-05", pop:70, kw:["éducation","outils","école"]},
-    {id:10, title:"Podcast : témoignages sur le handicap invisible", type:"Audio", cat:"cognitif", author:"Radio Inclusion", date:"2026-05-11", pop:34, kw:["témoignage","invisible"]},
-    {id:11, title:"Vos droits face à l'employeur : synthèse juridique", type:"Document", cat:"loi", author:"Défenseur des droits", date:"2026-04-02", pop:112, kw:["emploi","droit","loi"]},
-    {id:12, title:"Aides techniques pour la mobilité réduite", type:"Guide", cat:"moteur", author:"CNSA", date:"2026-03-08", pop:47, kw:["aides","mobilité"]}
+    {id:1, title:"Guide pratique de l'accessibilité numérique RGAA", type:"Guide", cat:"numerique", author:"Équipe Inclusif Connect", date:"2026-06-12", pop:98, kw:["RGAA","web","normes"], url:"documents/guide-rgaa.txt"},
+    {id:2, title:"Comprendre les troubles DYS en milieu scolaire", type:"Document", cat:"cognitif", author:"C. Amoussou", date:"2026-05-28", pop:76, kw:["dys","école","cognitif"], url:"documents/dys-scolaire.pdf"},
+    {id:3, title:"Vidéo : se déplacer en fauteuil roulant en ville", type:"Vidéo", cat:"moteur", author:"Réseau Mobilité+", date:"2026-04-15", pop:64, kw:["mobilité","fauteuil","ville"], url:"videos/fauteuil-ville.mp4"},
+    {id:4, title:"Initiation à la langue des signes (podcast)", type:"Audio", cat:"sensoriel", author:"Association Signes &amp; Voix", date:"2026-07-02", pop:53, kw:["LSF","audition"], url:"audio/lsf-podcast.wav"},
+    {id:5, title:"Loi sur l'accessibilité des ERP : ce qu'il faut savoir", type:"Document", cat:"loi", author:"Ministère des Solidarités", date:"2026-03-20", pop:120, kw:["loi","ERP","droit"], url:"documents/loi-erp.pdf"},
+    {id:6, title:"Aménager un bâtiment accessible : guide technique", type:"Guide", cat:"batiments", author:"Ordre des architectes", date:"2026-02-18", pop:41, kw:["bâtiment","normes","travaux"], url:"documents/guide-batiment.pdf"},
+    {id:7, title:"Créer des documents accessibles avec Word", type:"Guide", cat:"numerique", author:"Équipe Inclusif Connect", date:"2026-07-20", pop:88, kw:["bureautique","word","numérique"], url:"documents/word-accessible.pdf"},
+    {id:8, title:"Vidéo pédagogique : le braille au quotidien", type:"Vidéo", cat:"sensoriel", author:"Institut Louis Braille", date:"2026-01-30", pop:59, kw:["braille","vision"], url:"videos/braille-quotidien.mp4"},
+    {id:9, title:"Outils numériques pour l'apprentissage inclusif", type:"Document", cat:"apprentissage", author:"F. Konaté", date:"2026-06-05", pop:70, kw:["éducation","outils","école"], url:"documents/outils-apprentissage.pdf"},
+    {id:10, title:"Podcast : témoignages sur le handicap invisible", type:"Audio", cat:"cognitif", author:"Radio Inclusion", date:"2026-05-11", pop:34, kw:["témoignage","invisible"], url:"audio/temoignages-invisible.wav"},
+    {id:11, title:"Vos droits face à l'employeur : synthèse juridique", type:"Document", cat:"loi", author:"Défenseur des droits", date:"2026-04-02", pop:112, kw:["emploi","droit","loi"], url:"documents/droits-emploi.pdf"},
+    {id:12, title:"Aides techniques pour la mobilité réduite", type:"Guide", cat:"moteur", author:"CNSA", date:"2026-03-08", pop:47, kw:["aides","mobilité"], url:"documents/aides-mobilite.pdf"}
   ];
 
   const catLabel = id => (CATEGORIES.find(c => c.id === id) || {}).label || id;
@@ -602,6 +625,7 @@
     favorites: new Set()
   };
 
+
   /* ================= UTILITAIRES ================= */
   function announce(msg){
     const live = document.getElementById("liveRegion");
@@ -612,6 +636,7 @@
     const d = new Date(iso);
     return d.toLocaleDateString("fr-FR", {day:"numeric", month:"long", year:"numeric"});
   }
+  
 
   /* ================= RENDU CATÉGORIES ================= */
   const catGrid = document.getElementById("catGrid");
@@ -628,7 +653,7 @@
     });
     catGrid.appendChild(btn);
   });
-
+  
   /* ================= RENDU FILTRES TYPE ================= */
   const TYPES = ["Document", "Vidéo", "Audio", "Guide"];
   const typeChips = document.getElementById("typeChips");
@@ -713,16 +738,16 @@
           <p class="doc-meta">${catLabel(doc.cat)} · ${doc.author} · ${formatDate(doc.date)}</p>
           <div class="doc-keywords">${doc.kw.map(k => `<span class="kw">${k}</span>`).join("")}</div>
           <div class="doc-card-actions">
-            <button class="icon-btn btn-open" type="button">Voir la fiche</button>
-            <button class="icon-btn btn-download" type="button">⬇ Télécharger</button>
-            <button class="icon-btn btn-share" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;vertical-align:middle;margin-right:6px;"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l4 4-4 4"/><path d="M20 10H8"/></svg>Partager</button>
+            <button class="icon-btn btn-open" type="button">Fiche</button>
+            <button class="icon-btn btn-download" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>Télécharger</button>
+            <button class="icon-btn btn-share" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6 15.4 6.4"/><path d="M8.6 13.4 15.4 17.6"/></svg>Partager</button>
           </div>
         </div>`;
 
       card.querySelector(".fav-btn").addEventListener("click", () => toggleFavorite(doc.id));
       card.querySelector(".btn-open").addEventListener("click", () => openDocModal(doc));
-      card.querySelector(".btn-download").addEventListener("click", () => announce(`Téléchargement de « ${doc.title} » lancé.`));
-      card.querySelector(".btn-share").addEventListener("click", () => announce(`Lien de partage copié pour « ${doc.title} ».`));
+      card.querySelector(".btn-download").addEventListener("click", () => downloadDocument(doc));
+      card.querySelector(".btn-share").addEventListener("click", () => openShareModal(doc));
 
       docGrid.appendChild(card);
     });
@@ -772,17 +797,148 @@
   overlay.addEventListener("click", e => { if (e.target === overlay) closeModal(); });
 
   function openDocModal(doc){
+    let playerHtml = "";
+    
+    if (doc.type === "Vidéo") {
+      playerHtml = `
+        <div style="margin:16px 0; background:var(--violet-50); border-radius:8px; padding:12px; text-align:center;">
+          <p style="margin:0 0 12px 0; color:var(--ink-soft);">Lecteur vidéo</p>
+          <video width="100%" height="400" controls style="border-radius:4px; background:#000;">
+            <source src="${doc.url}" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture vidéo.
+          </video>
+        </div>
+      `;
+    } else if (doc.type === "Audio") {
+      playerHtml = `
+        <div style="margin:16px 0; background:var(--violet-50); border-radius:8px; padding:16px;">
+          <p style="margin:0 0 12px 0; color:var(--ink-soft);">Lecteur audio</p>
+          <audio width="100%" controls style="width:100%;">
+            <source src="${doc.url}" type="audio/wav">
+            Votre navigateur ne supporte pas la lecture audio.
+          </audio>
+        </div>
+      `;
+    }
+    
     openModal(`
       <h2 id="modalTitle">${doc.title}</h2>
       <p style="color:var(--ink-soft); margin-bottom:14px;">${catLabel(doc.cat)} · ${doc.type}</p>
+      ${playerHtml}
       <p><strong>Auteur :</strong> ${doc.author}</p>
       <p><strong>Date de publication :</strong> ${formatDate(doc.date)}</p>
       <p><strong>Mots-clés :</strong> ${doc.kw.join(", ")}</p>
       <div style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap;">
-        <button class="btn btn-primary" type="button">⬇ Télécharger le document</button>
-        <button class="btn btn-ghost" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;vertical-align:middle;margin-right:6px;"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l4 4-4 4"/><path d="M20 10H8"/></svg>Partager</button>
+        <button class="btn btn-primary" id="docDownloadBtn" type="button">⬇ Télécharger le document</button>
+        <button class="btn btn-ghost" id="docShareBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;vertical-align:middle;margin-right:6px;"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6 15.4 6.4"/><path d="M8.6 13.4 15.4 17.6"/></svg>Partager</button>
       </div>
     `);
+    document.getElementById("docDownloadBtn").addEventListener("click", () => downloadDocument(doc));
+    document.getElementById("docShareBtn").addEventListener("click", () => openShareModal(doc));
+  }
+
+  function openShareModal(doc){
+    const docUrl = `${window.location.origin}${window.location.pathname}?doc=${doc.id}`;
+    const docTitle = doc.title;
+    const docText = `${docTitle} - Ressource de Inclusif Connect`;
+    
+    openModal(`
+      <h2 id="modalTitle">Partager : ${docTitle}</h2>
+      <p style="color:var(--ink-soft); margin-bottom:20px;">Partagez cette ressource sur vos réseaux sociaux ou par email.</p>
+      
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+        <button class="share-btn whatsapp-btn" type="button" id="shareWhatsApp" title="Partager sur WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:20px;height:20px;margin-right:8px;">
+            <path d="M17.471 16.516c-.393-.196-2.326-1.149-2.686-1.279-.373-.137-.644-.202-.917.202-.272.404-1.055 1.379-1.294 1.661-.239.282-.478.316-.871.12-.393-.197-1.656-.611-3.156-1.948-.168-.15-.266-.336-.596-.893-.271-.41 0-.884.272-1.168.27-.27.6-.704.9-1.053.3-.35.4-.593.6-.875.2-.282.1-.527-.05-.724-.15-.197-.917-2.211-1.254-3.026-.327-.776-.658-.671-.918-.671-.258 0-.558-.037-.858-.037-.3 0-.787.112-1.2.537-.414.425-1.58 1.543-1.58 3.76 0 2.218 1.618 4.368 1.844 4.684.226.315 3.169 4.847 7.674 6.79 1.072.473 1.91.756 2.563.968.887.28 1.693.24 2.331.145.71-.106 2.186-.894 2.493-1.758.307-.864.307-1.605.215-1.758-.092-.154-.338-.25-.704-.444z"/>
+          </svg>
+          WhatsApp
+        </button>
+        
+        <button class="share-btn facebook-btn" type="button" id="shareFacebook" title="Partager sur Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:20px;height:20px;margin-right:8px;">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+          Facebook
+        </button>
+        
+        <button class="share-btn twitter-btn" type="button" id="shareTwitter" title="Partager sur Twitter">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:20px;height:20px;margin-right:8px;">
+            <path d="M23.953 4.57a10 10 0 002.856-3.586c-1.017.45-2.11.777-3.227.975 1.16-.694 2.048-1.793 2.465-3.101-.98.588-2.057 1.014-3.215 1.245-.93-.99-2.255-1.607-3.72-1.607-2.812 0-5.095 2.284-5.095 5.095 0 .4.045.788.137 1.162-4.23-.212-7.98-2.24-10.497-5.33-.44.753-.688 1.628-.688 2.566 0 1.768.9 3.326 2.27 4.244-.835-.027-1.62-.255-2.306-.637v.065c0 2.468 1.755 4.527 4.086 4.993-.427.116-.88.18-1.345.18-.33 0-.65-.032-.96-.093.651 2.03 2.546 3.507 4.787 3.55-1.744 1.366-3.94 2.18-6.33 2.18-.41 0-.815-.024-1.214-.071 2.278 1.459 4.982 2.31 7.882 2.31 9.458 0 14.62-7.839 14.62-14.62 0-.223-.005-.445-.014-.667.996-.721 1.86-1.625 2.544-2.655z"/>
+          </svg>
+          Twitter
+        </button>
+        
+        <button class="share-btn email-btn" type="button" id="shareEmail" title="Partager par email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="width:20px;height:20px;margin-right:8px;">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          Email
+        </button>
+        
+        <button class="share-btn copy-btn" type="button" id="copyLink" title="Copier le lien">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="width:20px;height:20px;margin-right:8px;">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+          Copier le lien
+        </button>
+      </div>
+      
+      <div style="background:var(--violet-50); padding:12px; border-radius:8px; margin-top:12px;">
+        <p style="font-size:0.85rem; color:var(--ink-soft); margin:0;">
+          <strong>Lien de partage :</strong><br>
+          <code style="word-break:break-all; background:white; padding:4px; border-radius:4px; display:block; margin-top:4px;">${docUrl}</code>
+        </p>
+      </div>
+    `);
+    
+    document.getElementById("shareWhatsApp").addEventListener("click", () => {
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(docText + ' ' + docUrl)}`;
+      window.open(whatsappUrl, "_blank");
+      announce("Ouverture de WhatsApp pour partager la ressource.");
+    });
+    
+    document.getElementById("shareFacebook").addEventListener("click", () => {
+      const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(docUrl)}&quote=${encodeURIComponent(docText)}`;
+      window.open(facebookUrl, "_blank");
+      announce("Ouverture de Facebook pour partager la ressource.");
+    });
+    
+    document.getElementById("shareTwitter").addEventListener("click", () => {
+      const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(docUrl)}&text=${encodeURIComponent(docText)}`;
+      window.open(twitterUrl, "_blank");
+      announce("Ouverture de Twitter pour partager la ressource.");
+    });
+    
+    document.getElementById("shareEmail").addEventListener("click", () => {
+      const mailtoUrl = `mailto:?subject=${encodeURIComponent(docTitle)}&body=${encodeURIComponent(docText + ' ' + docUrl)}`;
+      window.location.href = mailtoUrl;
+      announce("Ouverture de votre client email pour partager la ressource.");
+    });
+    
+    document.getElementById("copyLink").addEventListener("click", () => {
+      navigator.clipboard.writeText(docUrl).then(() => {
+        announce("Lien copié dans le presse-papiers !");
+      }).catch(() => {
+        announce("Impossible de copier le lien. Veuillez le copier manuellement.");
+      });
+    });
+  }
+
+  function downloadDocument(doc){
+    if (!doc.url) {
+      announce("Le fichier n'est pas disponible pour ce document.");
+      return;
+    }
+    
+    const link = document.createElement("a");
+    link.href = doc.url;
+    link.download = doc.title.replace(/[^a-z0-9]/gi, '_').toLowerCase() + (doc.url.includes('.pdf') ? '.pdf' : '');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    announce(`Téléchargement de « ${doc.title} » lancé.`);
   }
 
   document.getElementById("btnAccount").addEventListener("click", () => {

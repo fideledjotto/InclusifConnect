@@ -1,0 +1,35 @@
+Guide pratique de l'accessibilité numérique RGAA
+===============================================
+
+Auteur: Équipe Inclusif Connect
+Date: 12 Juin 2026
+
+Contenu du guide RGAA (Référentiel Général d'Amélioration de l'Accessibilité)
+
+Ce guide couvre les principes fondamentaux de l'accessibilité web selon les normes WCAG 2.1 et RGAA.
+
+Chapitre 1: Introduction à l'accessibilité web
+- Qu'est-ce que l'accessibilité?
+- Pourquoi c'est important
+- Les bénéficiaires de l'accessibilité
+
+Chapitre 2: Les quatre principes WCAG
+- Perceptible
+- Utilisable
+- Compréhensible
+- Robuste
+
+Chapitre 3: Implémentation pratique
+- Balisage sémantique
+- Contraste et lisibilité
+- Navigation au clavier
+- Textes alternatifs
+
+Chapitre 4: Tests et validation
+- Tests manuels
+- Tests automatisés
+- Audit d'accessibilité
+
+Ressources supplémentaires
+- WCAG 2.1: https://www.w3.org/WAI/WCAG21/quickref/
+- RGAA 4.1: https://www.numerique.gouv.fr/publications/rgaa-accessibilite/
