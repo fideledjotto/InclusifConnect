@@ -15,10 +15,10 @@
   <a class="skip-link" href="#contenu">Aller directement au contenu</a>
 
   <div class="top-chrome">
-  <div class="a11y-bar" role="region" aria-label="Réglages d'accessibilité">
+  <div class="a11y-bar" id="a11yBar" role="region" aria-label="Réglages d'accessibilité">
     <div class="container">
       <div><strong>Affichage :</strong> <span class="visually-hint">adaptez la page à votre confort de lecture</span></div>
-      <div class="a11y-controls">
+      <div class="a11y-controls" id="a11yControls">
         <div class="a11y-group first">
           <button class="a11y-btn" id="btnFontMinus" type="button" aria-label="Réduire la taille du texte">A−</button>
           <button class="a11y-btn" id="btnFontReset" type="button" aria-label="Taille de texte par défaut">A</button>
@@ -46,6 +46,12 @@
           <li><a href="#voix">Témoignages</a></li>
           <li><a href="#aide">Aide</a></li>
         </ul>
+        <details class="mobile-settings" id="mobileSettings">
+          <summary>Paramètres</summary>
+          <div class="mobile-settings-body" id="mobileSettingsBody">
+            <p>Réglages d'affichage</p>
+          </div>
+        </details>
       </nav>
       <div class="header-actions">
         <button class="btn btn-ghost btn-small" id="btnFavView" type="button">♥ <span class="label">Favoris (<span id="favCount">0</span>)</span></button>

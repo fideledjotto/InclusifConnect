@@ -338,6 +338,53 @@
 
   const menuToggle = document.getElementById("menuToggle");
   const mainNav = document.getElementById("mainNav");
+  const a11yBar = document.getElementById("a11yBar");
+  const a11yControls = document.getElementById("a11yControls");
+  const mobileSettingsBody = document.getElementById("mobileSettingsBody");
+  const btnFavView = document.getElementById("btnFavView");
+  const headerActions = document.querySelector(".header-actions");
+  const mobileQuery = window.matchMedia("(max-width: 600px)");
+  let lineSpacingOn = localStorage.getItem("ic-line-space") === "1";
+
+  function updateLineSpacing() {
+    document.documentElement.style.setProperty("--line-height", lineSpacingOn ? "2" : "1.7");
+  }
+
+  function moveMobileSettings() {
+    const mobile = mobileQuery.matches;
+    if (mobile) {
+      mobileSettingsBody.appendChild(a11yControls);
+      let lineSpacing = document.getElementById("btnLineSpacing");
+      if (!lineSpacing) {
+        const lineSpacing = document.createElement("button");
+        lineSpacing.className = "a11y-btn";
+        lineSpacing.id = "btnLineSpacing";
+        lineSpacing.type = "button";
+        lineSpacing.textContent = "Espacement des lignes";
+        lineSpacing.setAttribute("aria-pressed", String(lineSpacingOn));
+        lineSpacing.onclick = () => {
+          lineSpacingOn = !lineSpacingOn;
+          lineSpacing.setAttribute("aria-pressed", String(lineSpacingOn));
+          localStorage.setItem("ic-line-space", lineSpacingOn ? "1" : "0");
+          updateLineSpacing();
+          announce(lineSpacingOn ? "Espacement des lignes augmenté." : "Espacement des lignes réinitialisé.");
+        };
+        mobileSettingsBody.appendChild(lineSpacing);
+      }
+      lineSpacing = document.getElementById("btnLineSpacing");
+      lineSpacing.setAttribute("aria-pressed", String(lineSpacingOn));
+      mobileSettingsBody.appendChild(lineSpacing);
+      mobileSettingsBody.appendChild(btnFavView);
+    } else {
+      a11yBar.querySelector(".container").appendChild(a11yControls);
+      headerActions.insertBefore(btnFavView, headerActions.firstElementChild);
+    }
+  }
+
+  updateLineSpacing();
+  moveMobileSettings();
+  mobileQuery.addEventListener("change", moveMobileSettings);
+
   menuToggle.addEventListener("click", () => {
     const open = mainNav.classList.toggle("is-open");
     menuToggle.setAttribute("aria-expanded", open);

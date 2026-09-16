@@ -21,6 +21,7 @@
   --font-logo: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif;
   --step: 1;
   --tracking: 0;
+  --line-height: 1.7;
 }
 
 body.contrast-high {
@@ -64,7 +65,7 @@ body {
   background:
     linear-gradient(180deg, #fff 0%, #fbf7ff 100%);
   letter-spacing: var(--tracking);
-  line-height: 1.7;
+  line-height: var(--line-height);
 }
 
 h1, h2, h3, h4 {
@@ -205,6 +206,7 @@ img { max-width: 100%; display: block; }
   padding: 6px 0;
 }
 .main-nav a:hover { border-bottom-color: var(--violet-500); }
+.mobile-settings { display: none; }
 
 .header-actions { display: flex; gap: 10px; align-items: center; }
 .btn {
@@ -818,12 +820,33 @@ footer a:hover { color: #fff; text-decoration: underline; }
 }
 
 @media (max-width: 600px) {
+  .a11y-bar { display: none; }
   .cat-grid,
   .doc-grid,
   .quote-grid,
   .steps,
   .footer-grid { grid-template-columns: 1fr; }
   .header-actions .btn span.label { display: none; }
+  .header-actions #btnFavView { display: none; }
   .hero-visual,
   .hero-visual img { min-height: 280px; }
+  .mobile-settings { display: block; margin-top: 8px; border-top: 1px solid var(--violet-100); padding-top: 8px; }
+  .mobile-settings summary { cursor: pointer; color: var(--violet-700); font-weight: 700; padding: 8px 0; }
+  .mobile-settings-body { padding: 8px 0 4px; }
+  .mobile-settings-body p { margin: 0 0 8px; color: var(--ink-soft); font-size: .82rem; }
+  .mobile-settings-body .a11y-controls { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+  .mobile-settings-body .a11y-group { flex-wrap: wrap; border: 0; padding: 0; }
+  .mobile-settings-body .a11y-btn { justify-content: center; flex: 1 1 auto; }
+  .mobile-settings-body #btnLineSpacing {
+    display: flex;
+    width: 100%;
+    margin-top: 8px;
+    justify-content: center;
+  }
+  .mobile-settings-body #btnFavView {
+    display: inline-flex;
+    width: 100%;
+    margin-top: 8px;
+    justify-content: center;
+  }
 }
