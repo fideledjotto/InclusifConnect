@@ -1,9 +1,0 @@
-Guide pratique de l'accessibilité numérique RGAA
-
-Ce document de démonstration résume les principes RGAA / WCAG :
-- Percevable : alternatives textuelles, contrastes, sous-titres.
-- Utilisable : navigation clavier, cibles assez grandes, pas de piège au clavier.
-- Compréhensible : langage clair, messages d'erreur explicites.
-- Robuste : code compatible avec les technologies d'assistance.
-
-Inclusif Connect — ressource de démonstration.
