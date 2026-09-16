@@ -26,6 +26,13 @@
     { id: 12, title: "Aides techniques pour la mobilité réduite", type: "Guide", cat: "moteur", author: "CNSA", date: "2026-03-08", pop: 47, url: "resources/pdf/aides-mobilite.pdf", img: "images/categories/theme-moteur.jpg" }
   ];
 
+  function mediaUrl(doc) {
+    if (!doc || !doc.url) return "";
+    const base = window.location.origin && window.location.origin !== "null" ? window.location.origin : "";
+    const pathname = doc.url.startsWith("http") ? doc.url : `${base}${base && !doc.url.startsWith("/") ? "/" : ""}${doc.url}`;
+    return pathname;
+  }
+
   const catLabel = (id) => (CATEGORIES.find((c) => c.id === id) || {}).label || id;
 
   const savedFavs = JSON.parse(localStorage.getItem("ic-favs") || "[]");
@@ -195,11 +202,14 @@
   overlay.addEventListener("click", (e) => { if (e.target === overlay) closeModal(); });
 
   function openDocModal(doc) {
+    const mediaSrc = mediaUrl(doc);
     let playerHtml = "";
     if (doc.type === "Vidéo") {
-      playerHtml = `<video width="100%" controls style="border-radius:8px;background:#000;margin:8px 0;"><source src="${doc.url}" type="video/mp4">Vidéo non disponible dans cette démo.</video>`;
+      playerHtml = `<video controls preload="metadata" style="width:100%;max-height:420px;border-radius:8px;background:#000;margin:8px 0;"><source src="${mediaSrc}" type="video/mp4">Votre navigateur ne supporte pas la lecture vidéo HTML5.</video>`;
     } else if (doc.type === "Audio") {
-      playerHtml = `<audio controls style="width:100%;margin:8px 0;"><source src="${doc.url}" type="audio/wav">Audio non disponible dans cette démo.</audio>`;
+      playerHtml = `<audio controls preload="metadata" style="width:100%;margin:8px 0;"><source src="${mediaSrc}" type="audio/wav">Votre navigateur ne supporte pas la lecture audio HTML5.</audio>`;
+    } else if (doc.type === "Document" || doc.type === "Guide") {
+      playerHtml = `<iframe title="Lecture du document ${doc.title}" src="${mediaSrc}" style="width:100%;min-height:560px;border:1px solid #ddd;border-radius:12px;background:#fff;"></iframe>`;
     }
     openModal(`
       <h2 id="modalTitle">${doc.title}</h2>
@@ -246,9 +256,12 @@
       announce("Fichier indisponible.");
       return;
     }
+
     const link = document.createElement("a");
-    link.href = doc.url;
-    link.download = "";
+    const safeUrl = doc.url.startsWith("http") ? doc.url : new URL(doc.url, window.location.href).href;
+    link.href = safeUrl;
+    link.download = safeUrl.split("/").pop() || doc.title;
+    link.rel = "noopener";
     document.body.appendChild(link);
     link.click();
     link.remove();

@@ -30,6 +30,8 @@ Route::get('/catalog/featured', [CatalogController::class, 'featured']);
 Route::get('/documents', [DocumentController::class, 'index']);
 Route::get('/documents/{slug}', [DocumentController::class, 'show']);
 Route::post('/documents/{document}/download', [DocumentController::class, 'download']);
+Route::get('/media/{type}/{filename}', [\App\Http\Controllers\MediaController::class, 'serve']);
+Route::get('/media/{type}/{filename}/download', [\App\Http\Controllers\MediaController::class, 'download']);
 
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'store']);
 Route::delete('/newsletter/unsubscribe', [NewsletterController::class, 'destroy']);
