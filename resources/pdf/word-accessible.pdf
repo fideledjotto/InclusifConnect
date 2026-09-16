@@ -1,0 +1,50 @@
+Créer des documents accessibles avec Word
+==========================================
+
+Auteur: Équipe Inclusif Connect
+Date: 20 Juillet 2026
+
+Guide pratique pour créer des documents Word accessibles.
+
+Étape 1: Configuration de base
+- Langue du document
+- Police lisible (sans serif)
+- Taille minimale: 12pt
+- Contraste suffisant (noir sur blanc)
+
+Étape 2: Structure du document
+- Titres hiérarchisés (H1, H2, H3)
+- Pas de mise en forme manuelle
+- Utiliser les styles Word
+- Numéroter les sections
+
+Étape 3: Tableaux
+- Entête de ligne/colonne
+- Pas de cellules fusionnées
+- Description du contenu
+- Légende si nécessaire
+
+Étape 4: Images et graphiques
+- Texte alternatif descriptif
+- Position pas trop grande
+- Légende explicative
+
+Étape 5: Listes
+- Utiliser les outils de liste
+- Structurer correctement
+- Niveau approprié
+
+Étape 6: Liens
+- Texte significatif
+- Pas d'URL brutes
+- Contraste visible
+
+Vérification d'accessibilité:
+- Vérificateur d'accessibilité Word
+- Export en PDF accessible
+- Test avec lecteur d'écran
+
+Bonnes pratiques:
+- Relecture attentive
+- Test avec différents navigateurs
+- Feedback utilisateurs

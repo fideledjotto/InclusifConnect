@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalogue | Inclusif Connect</title>
+  <meta name="description" content="Catalogue de ressources sur le handicap, l'accessibilité et les bonnes pratiques inclusives." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <style>
+    :root {
+      --page-soft: #f8f3ff;
+      --panel: #ffffff;
+      --line: #ebdefa;
+      --muted: #5a4d69;
+      --accent: #5d2c8a;
+      --accent-strong: #2d1649;
+      --gold: #f1bc4f;
+    }
+
+    body {
+      background: linear-gradient(180deg, #fff 0%, var(--page-soft) 100%);
+    }
+
+    .catalog-header {
+      padding: 72px 0 32px;
+      background: radial-gradient(circle at top left, rgba(122,60,180,0.12), transparent 30%),
+                  linear-gradient(180deg, #fff 0%, #faf5ff 100%);
+    }
+
+    .catalog-hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .catalog-eyebrow {
+      display: inline-flex;
+      border-radius: 999px;
+      background: #f1e7fb;
+      color: var(--accent);
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      margin-bottom: 16px;
+    }
+
+    .catalog-hero h1 {
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      margin: 0 0 16px;
+      max-width: 12ch;
+    }
+
+    .catalog-hero p {
+      font-size: 1.06rem;
+      color: var(--muted);
+      max-width: 56ch;
+      margin: 0 0 24px;
+    }
+
+    .catalog-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .catalog-aside {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .stat-box {
+      border-radius: 18px;
+      background: linear-gradient(180deg, #faf5ff 0%, #f2e8ff 100%);
+      padding: 18px 16px;
+      border: 1px solid var(--line);
+    }
+
+    .stat-box strong {
+      display: block;
+      font-size: 1.7rem;
+      line-height: 1.1;
+      color: var(--accent-strong);
+    }
+
+    .stat-box span {
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .catalog-main {
+      padding: 24px 0 80px;
+    }
+
+    .catalog-search {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr 0.3fr;
+      gap: 12px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 12px;
+      box-shadow: 0 18px 36px -28px rgba(45, 22, 73, 0.34);
+      margin-bottom: 24px;
+    }
+
+    .catalog-search input,
+    .catalog-search select,
+    .catalog-search button {
+      min-height: 52px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font: inherit;
+    }
+
+    .catalog-search input,
+    .catalog-search select {
+      background: #fff;
+      padding: 0 16px;
+      color: var(--accent-strong);
+    }
+
+    .catalog-layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    .filter-panel,
+    .catalog-results {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 18px 32px -30px rgba(45, 22, 73, 0.35);
+    }
+
+    .filter-panel h3,
+    .catalog-results h3 {
+      margin: 0 0 18px;
+      font-size: 1.1rem;
+    }
+
+    .filter-group {
+      margin-bottom: 20px;
+    }
+
+    .filter-group label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .filter-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-pill {
+      background: #f8f3ff;
+      color: var(--accent);
+      border: 1px solid var(--line);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .filter-pill.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .catalog-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .catalog-card img {
+      height: 180px;
+      width: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .catalog-card-body {
+      padding: 18px;
+    }
+
+    .catalog-card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    .catalog-tag {
+      background: #f1e7fb;
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-weight: 700;
+    }
+
+    .catalog-card h4 {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+    }
+
+    .catalog-card p {
+      color: var(--muted);
+      margin: 0 0 16px;
+      line-height: 1.6;
+    }
+
+    .catalog-card-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .catalog-card-actions .btn {
+      min-height: 42px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: .9rem;
+    }
+
+    .empty-state {
+      display: none;
+      margin-top: 20px;
+      border: 1px dashed var(--line);
+      border-radius: 18px;
+      padding: 26px;
+      text-align: center;
+      color: var(--muted);
+      background: #faf5ff;
+    }
+
+    .empty-state.visible {
+      display: block;
+    }
+
+    @media (max-width: 980px) {
+      .catalog-hero,
+      .catalog-layout {
+        grid-template-columns: 1fr;
+      }
+      .catalog-search {
+        grid-template-columns: 1fr;
+      }
+      .catalog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <a href="index.html" class="logo" aria-label="Inclusif Connect">
+        <img class="logo-image" src="images/logo.png" alt="Inclusif Connect">
+      </a>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <ul>
+          <li><a href="index.html#categories">Thématiques</a></li>
+          <li><a href="index.html#ressources">Ressources</a></li>
+          <li><a href="catalog.html" aria-current="page">Catalogue</a></li>
+          <li><a href="index.html#aide">Aide</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a class="btn btn-primary" href="index.html#ressources">Retour au site</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="catalog-header">
+      <div class="container catalog-hero">
+        <div>
+          <span class="catalog-eyebrow">Catalogue complet</span>
+          <h1>Des ressources à portée de main.</h1>
+          <p>Explorez les guides, vidéos, documents, podcasts et outils de référence. Trouvez rapidement un contenu utile selon votre besoin, votre thématique et votre niveau d’attention.</p>
+          <div class="catalog-actions">
+            <a class="btn btn-primary" href="#catalogue">Explorer le catalogue</a>
+            <a class="btn btn-ghost" href="index.html#contribuer">Proposer un document</a>
+          </div>
+        </div>
+
+        <aside class="catalog-aside" aria-label="Statistiques du catalogue">
+          <h2>Le catalogue en chiffres</h2>
+          <div class="stat-grid">
+            <div class="stat-box">
+              <strong id="statCatalogCount">0</strong>
+              <span>ressources</span>
+            </div>
+            <div class="stat-box">
+              <strong id="statCategoryCount">0</strong>
+              <span>thématiques</span>
+            </div>
+            <div class="stat-box">
+              <strong id="statViews">0</strong>
+              <span>vues</span>
+            </div>
+            <div class="stat-box">
+              <strong id="statUpdated">—</strong>
+              <span>mise à jour</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="catalogue" class="catalog-main">
+      <div class="container">
+        <form id="catalogSearchForm" class="catalog-search" role="search">
+          <input type="search" id="catalogQuery" placeholder="Rechercher un document, une thématique, un mot-clé…" aria-label="Recherche avancée" />
+          <select id="catalogType" aria-label="Type de ressource">
+            <option value="">Tous les types</option>
+            <option value="Document">Document</option>
+            <option value="Vidéo">Vidéo</option>
+            <option value="Audio">Audio</option>
+            <option value="Guide">Guide</option>
+          </select>
+          <button class="btn btn-primary" type="submit">Rechercher</button>
+        </form>
+
+        <div class="catalog-layout">
+          <aside class="filter-panel">
+            <h3>Filtrer par thématique</h3>
+            <div id="filterCategories" class="filter-group"></div>
+
+            <div class="filter-group">
+              <label>Types</label>
+              <div class="filter-list" id="filterTypes"></div>
+            </div>
+          </aside>
+
+          <div class="catalog-results">
+            <h3>Résultats</h3>
+            <div id="catalogGrid" class="catalog-grid" aria-live="polite"></div>
+            <div id="catalogEmpty" class="empty-state">
+              <strong>Aucune ressource ne correspond à votre recherche.</strong>
+              <p>Essayez un autre mot-clé ou réinitialisez les filtres.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <img class="logo-image" src="images/logo.png" alt="Inclusif Connect">
+        <p style="color:var(--violet-200);font-size:.88rem;max-width:30ch;">Ressources claires, utiles et accessibles pour tous.</p>
+        <span class="rgaa-tag">Conforme RGAA / WCAG</span>
+      </div>
+      <div>
+        <h4>Explorer</h4>
+        <ul>
+          <li><a href="index.html#categories">Thématiques</a></li>
+          <li><a href="index.html#ressources">Ressources</a></li>
+          <li><a href="catalog.html">Catalogue</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>À propos</h4>
+        <ul>
+          <li><a href="index.html#contribuer">Contribuer</a></li>
+          <li><a href="index.html#aide">Contact</a></li>
+          <li><a href="index.html#voix">Témoignages</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Réseaux</h4>
+        <ul>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Inclusif Connect</span>
+      <span>Fait pour être utilisé par tout le monde.</span>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    const state = {
+      query: '',
+      category: '',
+      type: '',
+      results: []
+    };
+
+    const catalogGrid = document.getElementById('catalogGrid');
+    const filterCategories = document.getElementById('filterCategories');
+    const filterTypes = document.getElementById('filterTypes');
+    const catalogEmpty = document.getElementById('catalogEmpty');
+
+    const DOCS = [
+      { id: 1, title: 'Guide pratique de l\'accessibilité numérique RGAA', type: 'Guide', category: 'numerique', categoryName: 'Accessibilité numérique', description: 'Méthodes de conception, critères RGAA et bonnes pratiques pour les interfaces web accessibles.', image: 'images/categories/theme-numerique.jpg', views: 1280 },
+      { id: 2, title: 'Comprendre les troubles DYS en milieu scolaire', type: 'Document', category: 'cognitif', categoryName: 'Handicap cognitif', description: 'Un repérage clair des besoins éducatifs particuliers et des aménagements pédagogiques.', image: 'images/categories/theme-cognitif.jpg', views: 980 },
+      { id: 3, title: 'Se déplacer en fauteuil roulant en ville', type: 'Vidéo', category: 'moteur', categoryName: 'Handicap moteur', description: 'Exemple concret d’aménagement urbain, itinéraires, autonomie et sécurité dans l’espace public.', image: 'images/categories/theme-moteur.jpg', views: 760 },
+      { id: 4, title: 'Initiation à la langue des signes', type: 'Audio', category: 'sensoriel', categoryName: 'Handicap sensoriel', description: 'Podcast pratique pour comprendre les bases de la communication en LSF et ses enjeux inclusifs.', image: 'images/categories/theme-sensoriel.jpg', views: 620 },
+      { id: 5, title: 'Accessibilité des ERP et obligations légales', type: 'Document', category: 'loi', categoryName: 'Textes de loi', description: 'Synthèse des exigences et du cadre réglementaire appliqué au secteur public et privé.', image: 'images/categories/theme-loi.jpg', views: 1140 },
+      { id: 6, title: 'Aménager un bâtiment accessible', type: 'Guide', category: 'batiments', categoryName: 'Accessibilité des bâtiments', description: 'Conseils pour les aménagements, circulations, sanitaires, signalétique et sécurité.', image: 'images/categories/theme-batiments.jpg', views: 830 },
+      { id: 7, title: 'Créer des documents accessibles avec Word', type: 'Guide', category: 'numerique', categoryName: 'Accessibilité numérique', description: 'Des astuces pour structurer ses fichiers, utiliser les styles et faciliter la lecture.', image: 'images/categories/theme-numerique.jpg', views: 970 },
+      { id: 8, title: 'Le braille au quotidien', type: 'Vidéo', category: 'sensoriel', categoryName: 'Handicap sensoriel', description: 'Une vidéo pédagogique sur le braille, ses usages pratiques et son rôle dans l’autonomie.', image: 'images/categories/theme-sensoriel-braille.jpg', views: 690 },
+      { id: 9, title: 'Outils numériques pour l’apprentissage inclusif', type: 'Document', category: 'apprentissage', categoryName: 'Outils d’apprentissage', description: 'Une sélection d’outils utiles pour diffuser des contenus pédagogiques plus ouverts et plus lisibles.', image: 'images/categories/theme-apprentissage.jpg', views: 910 },
+      { id: 10, title: 'Témoignages sur le handicap invisible', type: 'Audio', category: 'cognitif', categoryName: 'Handicap cognitif', description: 'Des récits concrets pour mieux comprendre les besoins cachés et les formes de soutien.', image: 'images/categories/theme-cognitif.jpg', views: 540 }
+    ];
+
+    const categories = [
+      { id: '', label: 'Tous' },
+      { id: 'moteur', label: 'Handicap moteur' },
+      { id: 'sensoriel', label: 'Handicap sensoriel' },
+      { id: 'cognitif', label: 'Handicap cognitif' },
+      { id: 'numerique', label: 'Accessibilité numérique' },
+      { id: 'batiments', label: 'Accessibilité des bâtiments' },
+      { id: 'loi', label: 'Textes de loi' },
+      { id: 'apprentissage', label: 'Outils d’apprentissage' }
+    ];
+
+    const types = ['', 'Document', 'Vidéo', 'Audio', 'Guide'];
+
+    function renderFilters() {
+      filterCategories.innerHTML = categories.map(category => `
+        <button class="filter-pill ${state.category === category.id ? 'active' : ''}" data-category="${category.id}" type="button">${category.label}</button>
+      `).join('');
+
+      filterTypes.innerHTML = types.map(type => `
+        <button class="filter-pill ${state.type === type ? 'active' : ''}" data-type="${type || 'all'}" type="button">${type || 'Tous'}</button>
+      `).join('');
+
+      document.querySelectorAll('[data-category]').forEach(button => {
+        button.addEventListener('click', () => {
+          state.category = button.dataset.category;
+          render();
+        });
+      });
+
+      document.querySelectorAll('[data-type]').forEach(button => {
+        button.addEventListener('click', () => {
+          state.type = button.dataset.type === 'all' ? '' : button.dataset.type;
+          render();
+        });
+      });
+    }
+
+    function getFilteredDocs() {
+      return DOCS.filter(doc => {
+        const matchesQuery = !state.query || `${doc.title} ${doc.categoryName} ${doc.type}`.toLowerCase().includes(state.query.toLowerCase());
+        const matchesCategory = !state.category || doc.category === state.category;
+        const matchesType = !state.type || doc.type === state.type;
+        return matchesQuery && matchesCategory && matchesType;
+      }).sort((a, b) => b.views - a.views);
+    }
+
+    function renderCards() {
+      const results = getFilteredDocs();
+      state.results = results;
+
+      catalogGrid.innerHTML = results.map(doc => `
+        <article class="catalog-card">
+          <img src="${doc.image}" alt="${doc.title}">
+          <div class="catalog-card-body">
+            <div class="catalog-card-meta">
+              <span class="catalog-tag">${doc.type}</span>
+              <span>${doc.categoryName}</span>
+            </div>
+            <h4>${doc.title}</h4>
+            <p>${doc.description}</p>
+            <div class="catalog-card-actions">
+              <span><strong>${doc.views}</strong> vues</span>
+              <a class="btn btn-primary" href="index.html#ressources">Consulter</a>
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      catalogEmpty.classList.toggle('visible', results.length === 0);
+    }
+
+    function renderStats() {
+      document.getElementById('statCatalogCount').textContent = DOCS.length;
+      document.getElementById('statCategoryCount').textContent = categories.length - 1;
+      document.getElementById('statViews').textContent = DOCS.reduce((sum, item) => sum + item.views, 0).toLocaleString('fr-FR');
+      document.getElementById('statUpdated').textContent = '2026';
+    }
+
+    function render() {
+      renderFilters();
+      renderCards();
+    }
+
+    document.getElementById('catalogSearchForm').addEventListener('submit', event => {
+      event.preventDefault();
+      state.query = document.getElementById('catalogQuery').value.trim();
+      state.type = document.getElementById('catalogType').value || '';
+      render();
+    });
+
+    renderStats();
+    render();
+  </script>
+</body>
+</html>

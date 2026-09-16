@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Admin\AdminDocumentController;
 use App\Http\Controllers\Api\Admin\AdminStatsController;
 use App\Http\Controllers\Api\Admin\AdminUserController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CatalogController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\DocumentController;
@@ -22,6 +23,9 @@ Route::post('/auth/login', [AuthController::class, 'login']);
 
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show']);
+
+Route::get('/catalog/summary', [CatalogController::class, 'summary']);
+Route::get('/catalog/featured', [CatalogController::class, 'featured']);
 
 Route::get('/documents', [DocumentController::class, 'index']);
 Route::get('/documents/{slug}', [DocumentController::class, 'show']);

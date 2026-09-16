@@ -1,1077 +1,309 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inclusif Connect - Ressources handicap &amp; accessibilité</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    /* --- Tokens : violet & blanc --- */
-    --violet-950:#26063f;
-    --violet-900:#340a54;
-    --violet-800:#4a1478;
-    --violet-700:#5e1c96;
-    --violet-600:#7c2fb8;
-    --violet-500:#9645cf;
-    --violet-400:#b579e0;
-    --violet-200:#e3cdf4;
-    --violet-100:#efe1f9;
-    --violet-50:#f8f2fc;
-    --white:#ffffff;
-    --ink:#221033;
-    --ink-soft:#4d3a63;
-    --gold:#e8b93a; /* unique accent de mise en avant, utilisé avec parcimonie */
-    --radius:14px;
-    --shadow:0 10px 30px -12px rgba(38,6,63,.35);
-    --font-display:'Montserrat',system-ui,sans-serif;
-    --font-body:'Montserrat',system-ui,sans-serif;
-    --font-logo:'Atkinson Hyperlegible Next','Atkinson Hyperlegible',system-ui,sans-serif;
-    --step:1;
-    --tracking:0;
-  }
-
-  /* --- Mode contraste renforcé --- */
-  body.contrast-high{
-    --violet-950:#000000;
-    --violet-900:#12002a;
-    --violet-800:#1d0040;
-    --violet-700:#2d0060;
-    --violet-600:#3d0080;
-    --violet-100:#ffffff;
-    --violet-50:#ffffff;
-    --ink:#000000;
-    --ink-soft:#000000;
-    --gold:#8a5c00;
-  }
-
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth; font-size:calc(16px * var(--step));}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
-  }
-
-  body{
-    margin:0;
-    font-family:var(--font-body);
-    color:var(--ink);
-    background:var(--white);
-    font-size:1rem;
-    letter-spacing:var(--tracking);
-    line-height:1.55;
-  }
-
-  h1,h2,h3,h4{
-    font-family:var(--font-display);
-    color:var(--violet-950);
-    line-height:1.15;
-    margin:0 0 .5em;
-  }
-
-  a{color:var(--violet-700);}
-  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible{
-    outline:3px solid var(--gold);
-    outline-offset:2px;
-    border-radius:4px;
-  }
-
-  img{max-width:100%; display:block;}
-  .container{max-width:1180px; margin:0 auto; padding:0 24px;}
-
-  /* Lien d'évitement */
-  .skip-link{
-    position:absolute; left:-999px; top:0; background:var(--violet-950); color:var(--white);
-    padding:12px 20px; z-index:200; border-radius:0 0 8px 0; font-weight:700;
-  }
-  .skip-link:focus{left:0;}
-
-  /* ---------- Barre d'accessibilité (élément signature) ---------- */
-  .a11y-bar{
-    background:var(--violet-950);
-    color:var(--white);
-    font-size:.85rem;
-  }
-  .a11y-bar .container{
-    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
-    padding-top:16px; padding-bottom:16px;
-  }
-  .a11y-bar strong{font-weight:700; margin-right:8px;}
-  .a11y-controls{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
-  .a11y-btn{
-    background:var(--violet-800); color:var(--white); border:1px solid var(--violet-600);
-    border-radius:8px; padding:10px 14px; cursor:pointer; font-family:inherit; font-size:.85rem;
-    display:inline-flex; align-items:center; gap:10px; min-height:44px;
-  }
-  .a11y-btn:hover{background:var(--violet-700);}
-  .a11y-btn[aria-pressed="true"]{background:var(--gold); color:var(--violet-950); border-color:var(--gold); font-weight:700;}
-  .a11y-group{display:flex; gap:10px; border-left:1px solid var(--violet-700); padding-left:10px; margin-left:4px;}
-
-  /* ---------- Header ---------- */
-  header.site-header{
-    background:var(--white);
-    border-bottom:1px solid var(--violet-100);
-    position:sticky; top:0; z-index:100;
-  }
-  .header-row{display:flex; align-items:center; justify-content:space-between; padding:16px 0; gap:16px;}
-  .logo{display:flex; align-items:center; gap:10px; text-decoration:none;}
-  .logo-mark{
-    width:42px; height:42px; border-radius:11px;
-    background:linear-gradient(155deg,var(--violet-600),var(--violet-900));
-    display:flex; align-items:center; justify-content:center; flex-shrink:0;
-  }
-  .logo-text{
-    display:inline-flex;
-    align-items:center;
-    line-height:1;
-    font-family:var(--font-logo);
-    font-weight:800;
-    font-size:1.25rem;
-    color:var(--violet-950);
-  }
-  .logo-text span{color:var(--violet-600);}
-
-  nav.main-nav ul{list-style:none; display:flex; gap:26px; margin:0; padding:0;}
-  nav.main-nav a{
-    text-decoration:none; color:var(--ink); font-weight:600; font-size:.97rem; padding:6px 2px;
-    border-bottom:2px solid transparent;
-  }
-  nav.main-nav a:hover{border-bottom-color:var(--violet-500);}
-
-  .header-actions{display:flex; gap:10px; align-items:center;}
-  .btn{
-    font-family:inherit; font-weight:700; border-radius:999px; padding:11px 20px; font-size:.95rem;
-    cursor:pointer; border:2px solid transparent; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
-  }
-  .btn-primary{background:var(--violet-700); color:var(--white);}
-  .btn-primary:hover{background:var(--violet-900);}
-  .btn-ghost{background:transparent; color:var(--violet-700); border-color:var(--violet-200);}
-  .btn-ghost:hover{background:var(--violet-50);}
-  .btn-small{padding:7px 14px; font-size:.82rem;}
-
-  /* ========== Boutons de partage ========== */
-  .share-btn {
-    display:inline-flex; align-items:center; justify-content:center; flex-direction:column;
-    padding:12px 16px; border-radius:8px; border:1px solid #ddd; cursor:pointer;
-    font-family:inherit; font-weight:600; font-size:.9rem; transition:all 0.2s;
-    background:white; color:#333; min-height:48px;
-  }
-  .share-btn:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.1); }
-  .whatsapp-btn { border-color:#25d366; color:#25d366; }
-  .whatsapp-btn:hover { background:#25d366; color:white; }
-  .facebook-btn { border-color:#1877f2; color:#1877f2; }
-  .facebook-btn:hover { background:#1877f2; color:white; }
-  .twitter-btn { border-color:#1da1f2; color:#1da1f2; }
-  .twitter-btn:hover { background:#1da1f2; color:white; }
-  .email-btn { border-color:#666; color:#666; }
-  .email-btn:hover { background:#666; color:white; }
-  .copy-btn { border-color:var(--violet-600); color:var(--violet-600); }
-  .copy-btn:hover { background:var(--violet-600); color:white; }
-
-  .menu-toggle{display:none; background:none; border:2px solid var(--violet-200); border-radius:8px; padding:8px 10px;}
-
-  /* ---------- Hero ---------- */
-  .hero{
-    background:radial-gradient(1200px 500px at 85% -10%, var(--violet-100), transparent 60%), var(--white);
-    padding:64px 0 56px;
-  }
-  .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:start;}
-  .hero-grid > div{display:flex; flex-direction:column; gap:24px;}
-  .hero-body-row{display:grid;  justify-content:space-between; gap:48px;}
-  .hero-body-row .lede{flex:1 1 340px; margin-top:0; margin-bottom:0;}
-  .hero-side-panel{display:flex; flex-direction:column; gap:18px; min-width:320px; max-width:420px;}
-  .hero-side-panel .search-box{margin:0;}
-  .hero-stats{display:flex; gap:18px; flex-wrap:wrap; margin:0;}
-  .hero-visual{margin-top:0;}
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px; background:var(--violet-100); color:var(--violet-800);
-    padding:6px 14px; border-radius:999px; font-weight:700; font-size:.8rem; letter-spacing:.04em; text-transform:uppercase;
-    margin-bottom:16px;
-  }
-  .eyebrow::before{display:none;}
-  .hero h1{font-size:clamp(2rem,4vw,3.1rem); max-width:14ch;}
-  .hero h1 em{font-style:normal; color:var(--violet-600);}
-  .hero p.lede{font-size:1.1rem; color:var(--ink-soft); max-width:46ch; margin-bottom:28px;}
-
-  .search-box{
-    display:flex; background:var(--white); border:2px solid var(--violet-200); border-radius:16px;
-    padding:8px; gap:8px; box-shadow:var(--shadow); flex-wrap:wrap;
-  }
-  .search-box input[type="search"]{
-    flex:1; min-width:180px; border:none; outline:none; font-family:inherit; font-size:1rem; padding:12px 14px; border-radius:10px; color:var(--ink);
-  }
-  .search-box select{
-    border:none; background:var(--violet-50); border-radius:10px; padding:12px 10px; font-family:inherit; font-size:.92rem; color:var(--ink);
-  }
-  .search-box button{white-space:nowrap;}
-
-  .hero-stats{display:flex; gap:28px; margin-top:26px; flex-wrap:wrap;}
-  .hero-stats div strong{display:block; font-family:var(--font-display); font-size:1.6rem; color:var(--violet-800);}
-  .hero-stats div span{font-size:.85rem; color:var(--ink-soft);}
-
-  .hero-visual{
-    background:linear-gradient(160deg,var(--violet-700),var(--violet-950));
-    border-radius:24px; padding:34px; color:var(--white); position:relative; overflow:hidden;
-  }
-  .hero-visual::after{
-    content:''; position:absolute; inset:0; background:radial-gradient(circle at 80% 10%, rgba(255,255,255,.15), transparent 55%);
-  }
-  .hero-visual h2{color:var(--white); font-size:1.15rem; position:relative;}
-  .theme-chip-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; position:relative; margin-top:16px;}
-  .theme-chip{
-    display:inline-flex; align-items:center; gap:10px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); border-radius:12px;
-    padding:12px; font-size:.85rem; font-weight:600;
-  }
-  .theme-chip svg{width:20px; height:20px; flex-shrink:0;}
-
-  /* ---------- Sections génériques ---------- */
-  section{padding:56px 0;}
-  #ressources > .container{padding-left:36px; padding-right:36px;}
-  .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:20px; margin-bottom:28px; flex-wrap:wrap;}
-  .section-head h2{font-size:clamp(2rem,2.4vw,2.4rem);}
-  .section-head p{color:var(--ink-soft); margin:6px 0 0; max-width:60ch;}
-
-  /* ---------- Catégories ---------- */
-  .cat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
-  .cat-card{
-    background:var(--violet-50); border:1px solid var(--violet-100); border-radius:var(--radius);
-    padding:22px; text-align:left; cursor:pointer; font-family:inherit; color:var(--ink); transition:transform .15s, box-shadow .15s;
-  }
-  .cat-card:hover{transform:translateY(-3px); box-shadow:var(--shadow);}
-  .cat-card .cat-icon{
-    width:44px; height:44px; border-radius:12px; background:var(--violet-700); color:var(--white);
-    display:flex; align-items:center; justify-content:center; margin-bottom:14px; font-size:1.2rem;
-  }
-  .cat-card h3{font-size:1.02rem; margin-bottom:4px;}
-  .cat-card p{margin:0; font-size:.85rem; color:var(--ink-soft);}
-  .cat-card[aria-pressed="true"]{border-color:var(--violet-600); box-shadow:0 0 0 2px var(--violet-500) inset;}
-
-  /* ---------- Filtres & tri ---------- */
-  .toolbar{
-    display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
-    background:var(--violet-50); border-radius:14px; padding:14px 18px; margin-bottom:24px;
-  }
-  .chips{display:flex; gap:8px; flex-wrap:wrap;}
-  .chip{
-    background:var(--white); border:1px solid var(--violet-200); border-radius:999px; padding:7px 14px;
-    font-size:.85rem; font-weight:600; cursor:pointer; color:var(--ink-soft);
-  }
-  .chip[aria-pressed="true"]{background:var(--violet-700); color:var(--white); border-color:var(--violet-700);}
-  .sort-label{display:flex; align-items:center; gap:8px; font-size:.88rem; font-weight:600; color:var(--ink-soft);}
-  .sort-label select{border:1px solid var(--violet-200); border-radius:8px; padding:8px 10px; font-family:inherit;}
-
-  /* ---------- Cartes documents ---------- */
-  .doc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-left:0; margin-right:0;}
-  .doc-card{
-    border:1px solid var(--violet-100); border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column;
-    background:var(--white);
-    min-height:320px;
-    margin-left:6px;
-    margin-right:6px;
-  }
-  .doc-card-top{background:var(--violet-100); padding:18px 20px; display:flex; justify-content:space-between; align-items:flex-start; gap:12px;}
-  .type-badge{
-    background:var(--violet-700); color:var(--white); font-size:.72rem; font-weight:700; padding:4px 10px; border-radius:999px;
-    text-transform:uppercase; letter-spacing:.03em;
-  }
-  .fav-btn{
-    background:var(--white); border:1px solid var(--violet-200); border-radius:50%; width:34px; height:34px; cursor:pointer;
-    font-size:1rem; display:flex; align-items:center; justify-content:center; color:var(--violet-600); flex-shrink:0;
-  }
-  .fav-btn[aria-pressed="true"]{background:var(--gold); border-color:var(--gold); color:var(--violet-950);}
-  .doc-card-body{padding:18px; flex:1; display:flex; flex-direction:column;}
-  .doc-card-body h3{font-size:1.02rem; margin-bottom:6px;}
-  .doc-meta{font-size:.8rem; color:var(--ink-soft); margin-bottom:10px;}
-  .doc-keywords{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;}
-  .kw{background:var(--violet-50); color:var(--violet-800); font-size:.72rem; padding:3px 9px; border-radius:999px; font-weight:600;}
-  .doc-card-actions{margin-top:auto; display:flex; gap:8px;}
-  .icon-btn{
-    background:var(--violet-50); border:1px solid var(--violet-100); border-radius:8px; padding:8px 10px; font-size:.85rem;
-    cursor:pointer; color:var(--violet-800); font-weight:700; display:inline-flex; align-items:center; gap:6px;
-  }
-  .icon-btn svg{width:1em; height:1em; flex-shrink:0;}
-  .icon-btn:hover{background:var(--violet-100);}
-
-  .empty-state{
-    text-align:center; padding:48px 20px; color:var(--ink-soft); background:var(--violet-50); border-radius:var(--radius);
-  }
-
-  .load-more{display:flex; justify-content:center; margin-top:30px;}
-
-  /* ---------- Bandeau contribuer ---------- */
-  .contribute{
-    background:linear-gradient(135deg,var(--violet-900),var(--violet-700));
-    color:var(--white); border-radius:24px; padding:44px; display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap;
-  }
-  .contribute h2{color:var(--white); font-size:1.6rem; max-width:20ch;}
-  .contribute p{color:var(--violet-100); max-width:44ch; margin:8px 0 0;}
-  .contribute .btn-primary{background:var(--gold); color:var(--violet-950);}
-  .contribute .btn-primary:hover{background:#f3ca63;}
-
-  /* ---------- Newsletter ---------- */
-  .newsletter{background:var(--violet-50); border-radius:24px; padding:40px; text-align:center;}
-  .newsletter form{display:flex; gap:10px; justify-content:center; margin-top:20px; flex-wrap:wrap; align-items:center;}
-  .newsletter-label{font-weight:700; color:var(--violet-800); display:inline-flex; align-items:center; margin:0;}
-  .newsletter input[type="email"]{
-    border:2px solid var(--violet-200); border-radius:999px; padding:12px 18px; font-family:inherit; min-width:280px; font-size:.95rem;
-  }
-  .form-note{font-size:.82rem; color:var(--ink-soft); margin-top:10px;}
-
-  /* ---------- Footer ---------- */
-  footer{background:var(--violet-950); color:var(--violet-100); padding:52px 0 26px; margin-top:40px;}
-  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:36px;}
-  footer h4{color:var(--white); font-size:.95rem; margin-bottom:14px;}
-  footer ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px;}
-  footer a{color:var(--violet-200); text-decoration:none; font-size:.9rem;}
-  footer a:hover{color:var(--white); text-decoration:underline;}
-  .footer-bottom{
-    border-top:1px solid var(--violet-800); margin-top:36px; padding-top:20px; display:flex; justify-content:space-between;
-    flex-wrap:wrap; gap:10px; font-size:.82rem; color:var(--violet-400);
-  }
-  .rgaa-tag{
-    display:inline-flex; align-items:center; gap:6px; background:var(--violet-800); padding:5px 12px; border-radius:999px; font-size:.75rem;
-  }
-
-  /* ---------- Modale ---------- */
-  .modal-overlay{
-    position:fixed; inset:0; background:rgba(34,16,51,.55); display:none; align-items:center; justify-content:center; z-index:300; padding:20px;
-  }
-  .modal-overlay.open{display:flex;}
-  .modal{
-    background:var(--white); border-radius:18px; max-width:520px; width:100%; padding:30px; max-height:85vh; overflow:auto;
-  }
-  .modal-close{float:right; background:var(--violet-50); border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; font-size:1rem;}
-  .modal h2{margin-top:6px;}
-
-  [role="status"].sr-live{
-    position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;
-  }
-
-  /* ---------- Responsive ---------- */
-  @media (max-width:920px){
-    .hero-grid{grid-template-columns:1fr;}
-    .cat-grid{grid-template-columns:repeat(2,1fr);}
-    .doc-grid{grid-template-columns:repeat(2,1fr);}
-    .footer-grid{grid-template-columns:1fr 1fr;}
-    nav.main-nav{display:none;}
-    .menu-toggle{display:inline-flex;}
-  }
-  @media (max-width:600px){
-    .cat-grid{grid-template-columns:1fr;}
-    .doc-grid{grid-template-columns:1fr;}
-    .footer-grid{grid-template-columns:1fr;}
-    .contribute{flex-direction:column; text-align:center;}
-    .hero-stats{gap:18px;}
-    .header-actions .btn span.label{display:none;}
-  }
-   
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Inclusif Connect réunit documents, vidéos et guides sur le handicap et l'accessibilité. Plateforme francophone conçue pour tout le monde.">
+  <title>Inclusif Connect — Ressources handicap &amp; accessibilité</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Atkinson+Hyperlegible:wght@400;700&family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="images/logo.png" type="image/png">
 </head>
 <body>
-<a class="skip-link" href="#contenu">Aller directement au contenu</a>
+  <a class="skip-link" href="#contenu">Aller directement au contenu</a>
 
-<!-- ============ BARRE D'ACCESSIBILITÉ (élément signature) ============ -->
-<div class="a11y-bar" role="region" aria-label="Réglages d'accessibilité">
-  <div class="container">
-    <div><strong>Affichage&nbsp;:</strong><span class="visually-hint">adaptez la page à votre confort de lecture</span></div>
-    <div class="a11y-controls">
-      <div class="a11y-group" style="border-left:none; padding-left:0; margin-left:0;">
-        <button class="a11y-btn" id="btnFontMinus" type="button" aria-label="Réduire la taille du texte" title="Réduire la taille du texte">A−</button>
-        <button class="a11y-btn" id="btnFontReset" type="button" aria-label="Taille de texte par défaut" title="Réinitialiser la taille du texte">A</button>
-        <button class="a11y-btn" id="btnFontPlus" type="button" aria-label="Augmenter la taille du texte" title="Augmenter la taille du texte">A+</button>
-      </div>
-      <div class="a11y-group">
-        <button class="a11y-btn" id="btnContrast" type="button" aria-pressed="false">Contraste élevé</button>
-        <button class="a11y-btn" id="btnSpacing" type="button" aria-pressed="false">Espacement du texte</button>
-        <button class="a11y-btn" id="btnReadAloud" type="button" aria-pressed="false" aria-label="Lire le texte à haute voix" title="Lire le texte à haute voix">Lecture</button>
+  <div class="top-chrome">
+  <div class="a11y-bar" role="region" aria-label="Réglages d'accessibilité">
+    <div class="container">
+      <div><strong>Affichage :</strong> <span class="visually-hint">adaptez la page à votre confort de lecture</span></div>
+      <div class="a11y-controls">
+        <div class="a11y-group first">
+          <button class="a11y-btn" id="btnFontMinus" type="button" aria-label="Réduire la taille du texte">A−</button>
+          <button class="a11y-btn" id="btnFontReset" type="button" aria-label="Taille de texte par défaut">A</button>
+          <button class="a11y-btn" id="btnFontPlus" type="button" aria-label="Augmenter la taille du texte">A+</button>
+        </div>
+        <div class="a11y-group">
+          <button class="a11y-btn" id="btnContrast" type="button" aria-pressed="false">Contraste élevé</button>
+          <button class="a11y-btn" id="btnSpacing" type="button" aria-pressed="false">Espacement</button>
+          <button class="a11y-btn" id="btnReadAloud" type="button" aria-pressed="false">Lecture</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ============ HEADER ============ -->
-<header class="site-header">
-  <div class="container header-row">
-    <a href="#accueil" class="logo">
-      <span class="logo-text">Inclusif<span>Connect</span></span>
-    </a>
-    <nav class="main-nav" aria-label="Navigation principale">
-      <ul>
-        <li><a href="#categories">Thématiques</a></li>
-        <li><a href="#ressources">Ressources</a></li>
-        <li><a href="#contribuer">Contribuer</a></li>
-        <li><a href="#aide">Aide &amp; contact</a></li>
-      </ul>
-    </nav>
-    <div class="header-actions">
-      <button class="btn btn-ghost btn-small" id="btnFavView" type="button">♥ <span class="label">Mes favoris (<span id="favCount">0</span>)</span></button>
-      <button class="btn btn-primary" id="btnAccount" type="button">Créer un compte</button>
-      <button class="menu-toggle" type="button" aria-label="Ouvrir le menu">☰</button>
+  <header class="site-header">
+    <div class="container header-row">
+      <a href="#accueil" class="logo" aria-label="Inclusif Connect">
+        <img class="logo-image" src="images/logo.png" alt="Inclusif Connect">
+      </a>
+      <nav class="main-nav" id="mainNav" aria-label="Navigation principale">
+        <ul>
+          <li><a href="#categories">Thématiques</a></li>
+          <li><a href="#methode">Comment ça marche</a></li>
+          <li><a href="#ressources">Ressources</a></li>
+          <li><a href="#voix">Témoignages</a></li>
+          <li><a href="#aide">Aide</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="btn btn-ghost btn-small" id="btnFavView" type="button">♥ <span class="label">Favoris (<span id="favCount">0</span>)</span></button>
+        <button class="btn btn-primary" id="btnAccount" type="button">Créer un compte</button>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Ouvrir le menu">☰</button>
+      </div>
     </div>
+  </header>
   </div>
-</header>
 
-<main id="contenu">
+  <main id="contenu">
+    <section class="hero" id="accueil">
+      <div class="container hero-grid">
+        <div>
+          <h1>Toutes les ressources sur le <em>handicap et l'accessibilité</em></h1>
+          <p class="lede">Documents, vidéos et guides classés par thème, vérifiés par notre équipe, pensés pour le clavier, le lecteur d'écran et une lecture confortable.</p>
+          <form class="search-box" id="heroSearchForm" role="search" aria-label="Rechercher une ressource">
+            <input type="search" id="searchInput" aria-label="Rechercher un document, un mot-clé ou un type de handicap" placeholder="Ex. : RGAA, braille, LSF…">
+            <select id="searchFormat" aria-label="Filtrer par format">
+              <option value="">Tous les formats</option>
+              <option value="Document">Document</option>
+              <option value="Vidéo">Vidéo</option>
+              <option value="Audio">Audio</option>
+              <option value="Guide">Guide</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Rechercher</button>
+          </form>
+          <div class="hero-stats">
+            <div><strong id="statDocs">0</strong><span>ressources</span></div>
+            <div><strong>7</strong><span>thématiques</span></div>
+            <div><strong>RGAA</strong><span>lecture inclusive</span></div>
+          </div>
+        </div>
+        <figure class="hero-visual">
+          <img src="images/hero/hero-inclusion.jpg" alt="Homme souriant en fauteuil roulant sur une place ensoleillée">
+          <figcaption class="hero-caption">
+            <strong>L'inclusion se photographie aussi.</strong>
+            <span>Des visages, des lieux, des outils — pas seulement des fichiers.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
 
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="accueil">
-    <div class="container hero-grid">
-      <div>
-        <span class="eyebrow">Plateforme francophone du handicap</span>
-        <h1>Toutes les ressources sur le <em>handicap et l'accessibilité</em>, réunies au même endroit</h1>
-        <div class="hero-body-row">
-          <p class="lede">Documents, vidéos et guides, classés par thème et vérifiés par notre équipe - pensés pour être lus par tout le monde, y compris avec un lecteur d'écran ou au clavier.</p>
-          <div class="hero-side-panel">
-            <form class="search-box" id="heroSearchForm" role="search" aria-label="Rechercher une ressource">
-              <label class="sr-live" for="searchInput">Rechercher un document, un mot-clé ou un type de handicap</label>
-              <input type="search" id="searchInput" placeholder="Ex. : guide accessibilité numérique, braille, RGAA…">
-              <select id="searchFormat" aria-label="Filtrer par format">
-                <option value="">Tous les formats</option>
-                <option value="Document">Document</option>
-                <option value="Vidéo">Vidéo</option>
-                <option value="Audio">Audio</option>
-                <option value="Guide">Guide</option>
-              </select>
-              <button class="btn btn-primary" type="submit">Rechercher</button>
-            </form>
-            <div class="hero-stats">
-              <div><strong id="statDocs">0</strong><span>ressources disponibles</span></div>
-              <div><strong>7</strong><span>thématiques couvertes</span></div>
-              <div><strong>RGAA / WCAG</strong><span>conforme aux normes</span></div>
+    <section id="categories">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Parcourir par thématique</h2>
+            <p>Choisissez un univers : les ressources se filtrent immédiatement en dessous.</p>
+          </div>
+        </div>
+        <div class="cat-grid" id="catGrid" role="group" aria-label="Filtrer par thématique"></div>
+      </div>
+    </section>
+
+    <section id="methode">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Trois gestes, zéro labyrinthe</h2>
+            <p>Une bibliothèque claire plutôt qu'un océan de liens.</p>
+          </div>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step-num">1</div>
+            <h3>Chercher</h3>
+            <p>Un mot-clé, un format ou une thématique. Le catalogue se resserre tout de suite.</p>
+          </article>
+          <article class="step">
+            <div class="step-num">2</div>
+            <h3>Lire ou écouter</h3>
+            <p>Fiches, guides, podcasts et vidéos. Agrandissez le texte ou lancez la lecture vocale.</p>
+          </article>
+          <article class="step">
+            <div class="step-num">3</div>
+            <h3>Garder</h3>
+            <p>Enregistrez vos favoris, partagez une ressource, proposez un document à vérifier.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Une bibliothèque utile, claire et accessible</h2>
+            <p>Chaque ressource est pensée pour être trouvée vite, comprise sans effort et utilisée dans la vie quotidienne.</p>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <img src="images/hero/hero-inclusion.jpg" alt="Personnes de différentes capacités dans un espace de travail inclusif">
+            <div>
+              <h3>Des contenus conçus pour tous</h3>
+              <p>Guides, vidéos, podcasts et fiches pratiques, dans une logique de lecture inclusive et de compréhension rapide.</p>
             </div>
+          </article>
+          <article class="feature-card">
+            <img src="images/people/portrait-amina.jpg" alt="Portrait d'une formatrice souriante">
+            <div>
+              <h3>Énergie pédagogique</h3>
+              <p>Des ressources sélectionnées pour les professionnels, les familles, les étudiants et les personnes concernées.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <img src="images/sections/contribuer.jpg" alt="Atelier inclusif autour d'une table">
+            <div>
+              <h3>Des parcours plus simples</h3>
+              <p>Filtre par thématique, par type et par recherche intelligente pour aller directement vers l'information utile.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="ressources">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Toutes les ressources</h2>
+            <p id="resultsCount">Chargement des ressources…</p>
+          </div>
+        </div>
+        <div class="toolbar">
+          <div class="chips" id="typeChips" role="group" aria-label="Filtrer par type de document"></div>
+          <label class="sort-label">Trier par
+            <select id="sortSelect" aria-label="Trier les ressources">
+              <option value="date">Date (récent)</option>
+              <option value="popularite">Popularité</option>
+              <option value="type">Type</option>
+            </select>
+          </label>
+        </div>
+        <div class="doc-grid" id="docGrid" aria-live="polite"></div>
+        <div id="emptyState" class="empty-state" hidden>
+          <p><strong>Aucune ressource ne correspond à votre recherche.</strong><br>Essayez un autre mot-clé ou réinitialisez les filtres.</p>
+          <button class="btn btn-ghost" id="btnReset" type="button">Réinitialiser les filtres</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="voices" id="voix">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Ils s'en servent au quotidien</h2>
+            <p>Des voix de personnes concernées, d'enseignants et d'employeurs.</p>
+          </div>
+        </div>
+        <div class="quote-grid">
+          <blockquote class="quote">
+            <img src="images/people/portrait-amina.jpg" alt="Portrait d'Amina K.">
+            <p>« Enfin un endroit où je retrouve guides RGAA et ressources LSF sans passer trois heures sur Google. »</p>
+            <cite>Amina K. · formatrice accessibilité</cite>
+          </blockquote>
+          <blockquote class="quote">
+            <img src="images/people/portrait-marc.jpg" alt="Portrait de Marc D.">
+            <p>« On a partagé le guide ERP avec toute la mairie. Clair, classé, téléchargeable. »</p>
+            <cite>Marc D. · chargé de voirie</cite>
+          </blockquote>
+          <blockquote class="quote">
+            <img src="images/people/portrait-lea.jpg" alt="Portrait de Léa M.">
+            <p>« La barre d'affichage change vraiment la lecture. J'agrandis, j'écoute, je reviens. »</p>
+            <cite>Léa M. · étudiante</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section id="contribuer">
+      <div class="container">
+        <div class="contribute-card">
+          <div class="contribute-copy">
+            <h2>Vous avez une ressource utile à partager ?</h2>
+            <p>Proposez un document, une vidéo ou un guide. Notre équipe le vérifie avant publication pour garantir la qualité de la plateforme.</p>
+            <p><button class="btn btn-gold" id="btnPropose" type="button">Proposer un document</button></p>
+          </div>
+          <div class="contribute-photo">
+            <img src="images/sections/contribuer.jpg" alt="Atelier inclusif autour d'une table, personnes de tous âges et de toutes capacités">
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="hero-visual">
-        <img src="images/Personagem_de_desenho_animado_homem_cadeira_de_rodas___Vetor_Premium-removebg-preview (1).png" alt="Illustration : personne en fauteuil roulant - personnage dessiné illustrant l'accessibilité et l'inclusion" style="max-width:100%; height:auto; margin-bottom:24px; border-radius:8px;">
-        <h2>Explorer par thématique</h2>
-        <div class="theme-chip-grid" aria-hidden="true">
-          <div class="theme-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Handicap moteur</div>
-          <div class="theme-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12Z"/><circle cx="12" cy="12" r="3"/></svg>Handicap sensoriel</div>
-          <div class="theme-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7a4 4 0 0 1 8 0c0 1.1-1 3-1 3H7s-1-1.9-1-3Z"/><path d="M6 11h8l1 2c0 1-1 4-4 4s-4-3-4-4l1-2Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>Handicap cognitif</div>
-          <div class="theme-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M9 18v2"/><path d="M15 18v2"/></svg>Accessibilité numérique</div>
-          <div class="theme-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V6l8-4 8 4v16"/><path d="M9 22V12h6v10"/><path d="M9 7h6"/></svg>Accessibilité des bâtiments</div>
-          <div class="theme-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 20h8"/><path d="M12 20v-7"/><path d="M8 13l2-4 2 3 2-3 2 4"/><path d="M5 8h14"/></svg>Textes de loi</div>
+    <section id="aide">
+      <div class="container help-grid">
+        <div class="panel">
+          <h2>Une question, un obstacle, un besoin ?</h2>
+          <p>Écrivez-nous. Nous répondons sous 48 heures, hors week-end.</p>
+          <form class="contact-form" id="contactForm">
+            <label>Nom<input type="text" name="name" required autocomplete="name"></label>
+            <label>Email<input type="email" name="email" required autocomplete="email"></label>
+            <label>Message<textarea name="message" rows="4" required placeholder="Décrivez votre besoin"></textarea></label>
+            <button class="btn btn-primary" type="submit">Envoyer le message</button>
+          </form>
+        </div>
+        <div class="panel newsletter">
+          <h2>Lettre d'information</h2>
+          <p>Une fois par mois : nouvelles ressources et actualités de l'accessibilité.</p>
+          <form id="newsletterForm">
+            <label class="sr-live" for="newsletterEmail">Adresse e-mail</label>
+            <input type="email" id="newsletterEmail" placeholder="votre@email.com" required>
+            <button class="btn btn-primary" type="submit">S'inscrire</button>
+          </form>
+          <p class="form-note">Données utilisées uniquement pour cet envoi, conformément au RGPD.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- ============ CATÉGORIES ============ -->
-  <section id="categories">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Parcourir par thématique</h2>
-          <p>Sélectionnez une thématique pour filtrer instantanément les ressources ci-dessous.</p>
-        </div>
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <img class="logo-image" src="images/logo.png" alt="Inclusif Connect">
+        <p style="color:var(--violet-200);font-size:.88rem;max-width:32ch;">La plateforme francophone qui réunit les ressources sur le handicap et l'accessibilité.</p>
+        <span class="rgaa-tag">Conforme RGAA / WCAG</span>
       </div>
-      <div class="cat-grid" id="catGrid" role="group" aria-label="Filtrer par thématique"></div>
-    </div>
-  </section>
-
-  <!-- ============ RESSOURCES ============ -->
-  <section id="ressources">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Toutes les ressources</h2>
-          <p id="resultsCount">Chargement des ressources…</p>
-        </div>
+      <div>
+        <h4>Explorer</h4>
+        <ul>
+          <li><a href="#categories">Thématiques</a></li>
+          <li><a href="#ressources">Toutes les ressources</a></li>
+          <li><a href="#contribuer">Proposer un document</a></li>
+        </ul>
       </div>
-
-      <div class="toolbar">
-        <div class="chips" id="typeChips" role="group" aria-label="Filtrer par type de document"></div>
-        <label class="sort-label">Trier par
-          <select id="sortSelect" aria-label="Trier les ressources">
-            <option value="date">Date (récent)</option>
-            <option value="popularite">Popularité</option>
-            <option value="type">Type</option>
-          </select>
-        </label>
+      <div>
+        <h4>Compte</h4>
+        <ul>
+          <li><a href="#" id="footerLogin">Se connecter</a></li>
+          <li><a href="#" id="footerFav">Mes favoris</a></li>
+          <li><a href="#aide" id="linkNews">Lettre d'information</a></li>
+        </ul>
       </div>
-
-      <div class="doc-grid" id="docGrid" aria-live="polite"></div>
-      <div id="emptyState" class="empty-state" hidden>
-        <p><strong>Aucune ressource ne correspond à votre recherche.</strong><br>Essayez un autre mot-clé ou réinitialisez les filtres.</p>
-        <button class="btn btn-ghost" id="btnReset" type="button">Réinitialiser les filtres</button>
+      <div>
+        <h4>Aide</h4>
+        <ul>
+          <li><a href="#aide" id="linkContact">Contacter l'équipe</a></li>
+          <li><a href="#" id="linkA11y">Déclaration d'accessibilité</a></li>
+          <li><a href="#" id="linkLegal">Mentions légales</a></li>
+        </ul>
       </div>
     </div>
-  </section>
+    <div class="container footer-bottom">
+      <span>© 2026 Inclusif Connect. Tous droits réservés.</span>
+      <span>Fait pour être utilisé par tout le monde.</span>
+    </div>
+  </footer>
 
-  <!-- ============ CONTRIBUER ============ -->
-  <section id="contribuer">
-    <div class="container">
-      <div class="contribute">
-        <div>
-          <h2>Vous avez une ressource utile à partager ?</h2>
-          <p>Proposez un document, une vidéo ou un guide. Notre équipe le vérifie avant publication pour garantir la qualité de la plateforme.</p>
-        </div>
-        <button class="btn btn-primary" id="btnPropose" type="button">Proposer un document</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ NEWSLETTER ============ -->
-  <section id="aide">
-    <div class="container">
-      <div class="newsletter">
-        <h2>Restez informé·e des nouveautés</h2>
-        <p>Recevez les nouvelles ressources et actualités sur le handicap et l'accessibilité, une fois par mois.</p>
-        <form id="newsletterForm">
-          <label class="newsletter-label" for="newsletterEmail">Adresse e-mail</label>
-          <input type="email" id="newsletterEmail" placeholder="votre@email.com" required>
-          <button class="btn btn-primary" type="submit">S'inscrire</button>
-        </form>
-        <p class="form-note">Vos données sont protégées conformément au RGPD. Besoin d'aide ? <a href="#">Contactez notre équipe</a>.</p>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<!-- ============ FOOTER ============ -->
-<footer>
-  <div class="container footer-grid">
-    <div>
-      <div class="logo" style="margin-bottom:14px;">
-          <span class="logo-text" style="color:white;">Inclusif<span style="color:var(--violet-400);">Connect</span></span>
-      </div>
-      <p style="color:var(--violet-200); font-size:.88rem; max-width:32ch;">La plateforme francophone qui réunit les ressources sur le handicap et l'accessibilité.</p>
-      <span class="rgaa-tag">Conforme RGAA / WCAG</span>
-    </div>
-    <div>
-      <h4>Explorer</h4>
-      <ul>
-        <li><a href="#categories">Thématiques</a></li>
-        <li><a href="#ressources">Toutes les ressources</a></li>
-        <li><a href="#contribuer">Proposer un document</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Compte</h4>
-      <ul>
-        <li><a href="#" id="footerLogin">Se connecter</a></li>
-        <li><a href="#" id="footerFav">Mes favoris</a></li>
-        <li><a href="#">Lettre d'information</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Aide</h4>
-      <ul>
-        <li><a href="#">Contacter l'équipe</a></li>
-        <li><a href="#">Déclaration d'accessibilité</a></li>
-        <li><a href="#">Mentions légales</a></li>
-      </ul>
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Fermer la fenêtre">✕</button>
+      <div id="modalContent"></div>
     </div>
   </div>
-  <div class="container footer-bottom">
-    <span>© 2026 Inclusif Connect. Tous droits réservés.</span>
-    <span>Fait pour être utilisé par tout le monde.</span>
-  </div>
-</footer>
 
-<!-- ============ MODALE (proposer / connexion / doc) ============ -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <button class="modal-close" id="modalClose" type="button" aria-label="Fermer la fenêtre">✕</button>
-    <div id="modalContent"></div>
-  </div>
-</div>
-
-<div role="status" class="sr-live" id="liveRegion"></div>
-
-<script>
-(function(){
-  "use strict";
-
-  /* ================= DONNÉES ================= */
-  const CATEGORIES = [
-    {id:"moteur", label:"Handicap moteur", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="16" r="3"/><path d="M8 16h6l3 4"/><path d="M11 14V6h4"/><path d="M5 7c1-2 3-3 5-3s4 1 5 3"/></svg>`, desc:"Mobilité, aides techniques, aménagements."},
-    {id:"sensoriel", label:"Handicap sensoriel", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12Z"/><circle cx="12" cy="12" r="3"/></svg>`, desc:"Vision, audition, communication adaptée."},
-    {id:"cognitif", label:"Handicap cognitif", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7a4 4 0 0 1 8 0c0 1.1-1 3-1 3H7s-1-1.9-1-3Z"/><path d="M6 11h8l1 2c0 1-1 4-4 4s-4-3-4-4l1-2Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>`, desc:"Apprentissage, troubles DYS, autisme."},
-    {id:"numerique", label:"Accessibilité numérique", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M9 18v2"/><path d="M15 18v2"/></svg>`, desc:"Sites web, applications, RGAA."},
-    {id:"batiments", label:"Accessibilité des bâtiments", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V6l8-4 8 4v16"/><path d="M9 22V12h6v10"/><path d="M9 7h6"/></svg>`, desc:"ERP, voirie, normes de construction."},
-    {id:"loi", label:"Textes de loi", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 20h8"/><path d="M12 20v-7"/><path d="M8 13l2-4 2 3 2-3 2 4"/><path d="M5 8h14"/></svg>`, desc:"Lois, décrets et droits des personnes."},
-    {id:"apprentissage", label:"Outils d'apprentissage", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4.5l8 3 8-3v15"/><path d="M12 7.5v13"/><path d="M8 16.5h8"/></svg>`, desc:"Formations, tutoriels, supports pédagogiques."}
-  ];
-
-  const DOCS = [
-    {id:1, title:"Guide pratique de l'accessibilité numérique RGAA", type:"Guide", cat:"numerique", author:"Équipe Inclusif Connect", date:"2026-06-12", pop:98, kw:["RGAA","web","normes"], url:"documents/guide-rgaa.txt"},
-    {id:2, title:"Comprendre les troubles DYS en milieu scolaire", type:"Document", cat:"cognitif", author:"C. Amoussou", date:"2026-05-28", pop:76, kw:["dys","école","cognitif"], url:"documents/dys-scolaire.pdf"},
-    {id:3, title:"Vidéo : se déplacer en fauteuil roulant en ville", type:"Vidéo", cat:"moteur", author:"Réseau Mobilité+", date:"2026-04-15", pop:64, kw:["mobilité","fauteuil","ville"], url:"videos/fauteuil-ville.mp4"},
-    {id:4, title:"Initiation à la langue des signes (podcast)", type:"Audio", cat:"sensoriel", author:"Association Signes &amp; Voix", date:"2026-07-02", pop:53, kw:["LSF","audition"], url:"audio/lsf-podcast.wav"},
-    {id:5, title:"Loi sur l'accessibilité des ERP : ce qu'il faut savoir", type:"Document", cat:"loi", author:"Ministère des Solidarités", date:"2026-03-20", pop:120, kw:["loi","ERP","droit"], url:"documents/loi-erp.pdf"},
-    {id:6, title:"Aménager un bâtiment accessible : guide technique", type:"Guide", cat:"batiments", author:"Ordre des architectes", date:"2026-02-18", pop:41, kw:["bâtiment","normes","travaux"], url:"documents/guide-batiment.pdf"},
-    {id:7, title:"Créer des documents accessibles avec Word", type:"Guide", cat:"numerique", author:"Équipe Inclusif Connect", date:"2026-07-20", pop:88, kw:["bureautique","word","numérique"], url:"documents/word-accessible.pdf"},
-    {id:8, title:"Vidéo pédagogique : le braille au quotidien", type:"Vidéo", cat:"sensoriel", author:"Institut Louis Braille", date:"2026-01-30", pop:59, kw:["braille","vision"], url:"videos/braille-quotidien.mp4"},
-    {id:9, title:"Outils numériques pour l'apprentissage inclusif", type:"Document", cat:"apprentissage", author:"F. Konaté", date:"2026-06-05", pop:70, kw:["éducation","outils","école"], url:"documents/outils-apprentissage.pdf"},
-    {id:10, title:"Podcast : témoignages sur le handicap invisible", type:"Audio", cat:"cognitif", author:"Radio Inclusion", date:"2026-05-11", pop:34, kw:["témoignage","invisible"], url:"audio/temoignages-invisible.wav"},
-    {id:11, title:"Vos droits face à l'employeur : synthèse juridique", type:"Document", cat:"loi", author:"Défenseur des droits", date:"2026-04-02", pop:112, kw:["emploi","droit","loi"], url:"documents/droits-emploi.pdf"},
-    {id:12, title:"Aides techniques pour la mobilité réduite", type:"Guide", cat:"moteur", author:"CNSA", date:"2026-03-08", pop:47, kw:["aides","mobilité"], url:"documents/aides-mobilite.pdf"}
-  ];
-
-  const catLabel = id => (CATEGORIES.find(c => c.id === id) || {}).label || id;
-
-  /* ================= ÉTAT ================= */
-  const state = {
-    activeCat: null,
-    activeType: null,
-    query: "",
-    sort: "date",
-    favorites: new Set()
-  };
-
-
-  /* ================= UTILITAIRES ================= */
-  function announce(msg){
-    const live = document.getElementById("liveRegion");
-    live.textContent = "";
-    setTimeout(() => { live.textContent = msg; }, 30);
-  }
-  function formatDate(iso){
-    const d = new Date(iso);
-    return d.toLocaleDateString("fr-FR", {day:"numeric", month:"long", year:"numeric"});
-  }
-  
-
-  /* ================= RENDU CATÉGORIES ================= */
-  const catGrid = document.getElementById("catGrid");
-  CATEGORIES.forEach(cat => {
-    const btn = document.createElement("button");
-    btn.className = "cat-card";
-    btn.type = "button";
-    btn.setAttribute("aria-pressed", "false");
-    btn.innerHTML = `<span class="cat-icon" aria-hidden="true">${cat.icon}</span><h3>${cat.label}</h3><p>${cat.desc}</p>`;
-    btn.addEventListener("click", () => {
-      state.activeCat = state.activeCat === cat.id ? null : cat.id;
-      renderAll();
-      document.getElementById("ressources").scrollIntoView({behavior: "smooth", block: "start"});
-    });
-    catGrid.appendChild(btn);
-  });
-  
-  /* ================= RENDU FILTRES TYPE ================= */
-  const TYPES = ["Document", "Vidéo", "Audio", "Guide"];
-  const typeChips = document.getElementById("typeChips");
-  TYPES.forEach(type => {
-    const chip = document.createElement("button");
-    chip.className = "chip";
-    chip.type = "button";
-    chip.textContent = type;
-    chip.setAttribute("aria-pressed", "false");
-    chip.addEventListener("click", () => {
-      state.activeType = state.activeType === type ? null : type;
-      renderAll();
-    });
-    typeChips.appendChild(chip);
-  });
-
-  /* ================= RECHERCHE / TRI ================= */
-  document.getElementById("heroSearchForm").addEventListener("submit", e => {
-    e.preventDefault();
-    state.query = document.getElementById("searchInput").value.trim().toLowerCase();
-    const fmt = document.getElementById("searchFormat").value;
-    state.activeType = fmt || null;
-    renderAll();
-    document.getElementById("ressources").scrollIntoView({behavior: "smooth", block: "start"});
-  });
-
-  document.getElementById("sortSelect").addEventListener("change", e => {
-    state.sort = e.target.value;
-    renderAll();
-  });
-
-  document.getElementById("btnReset").addEventListener("click", () => {
-    state.activeCat = null;
-    state.activeType = null;
-    state.query = "";
-    document.getElementById("searchInput").value = "";
-    document.getElementById("searchFormat").value = "";
-    renderAll();
-    announce("Filtres réinitialisés.");
-  });
-
-  /* ================= RENDU DOCUMENTS ================= */
-  const docGrid = document.getElementById("docGrid");
-  const emptyState = document.getElementById("emptyState");
-  const resultsCount = document.getElementById("resultsCount");
-
-  function getFiltered(){
-    let list = DOCS.filter(d => {
-      if (state.activeCat && d.cat !== state.activeCat) return false;
-      if (state.activeType && d.type !== state.activeType) return false;
-      if (state.query){
-        const hay = (d.title + " " + d.author + " " + d.kw.join(" ") + " " + catLabel(d.cat)).toLowerCase();
-        if (!hay.includes(state.query)) return false;
-      }
-      return true;
-    });
-    if (state.sort === "date") list.sort((a,b) => new Date(b.date) - new Date(a.date));
-    if (state.sort === "popularite") list.sort((a,b) => b.pop - a.pop);
-    if (state.sort === "type") list.sort((a,b) => a.type.localeCompare(b.type));
-    return list;
-  }
-
-  function renderDocs(){
-    const list = getFiltered();
-    docGrid.innerHTML = "";
-    resultsCount.textContent = list.length + (list.length > 1 ? " ressources trouvées" : " ressource trouvée");
-    emptyState.hidden = list.length !== 0;
-
-    list.forEach(doc => {
-      const card = document.createElement("article");
-      card.className = "doc-card";
-      const isFav = state.favorites.has(doc.id);
-      card.innerHTML = `
-        <div class="doc-card-top">
-          <span class="type-badge">${doc.type}</span>
-          <button class="fav-btn" type="button" aria-pressed="${isFav}" aria-label="${isFav ? "Retirer des favoris" : "Ajouter aux favoris"} : ${doc.title}">
-            ${isFav ? "♥" : "♡"}
-          </button>
-        </div>
-        <div class="doc-card-body">
-          <h3>${doc.title}</h3>
-          <p class="doc-meta">${catLabel(doc.cat)} · ${doc.author} · ${formatDate(doc.date)}</p>
-          <div class="doc-keywords">${doc.kw.map(k => `<span class="kw">${k}</span>`).join("")}</div>
-          <div class="doc-card-actions">
-            <button class="icon-btn btn-open" type="button">Fiche</button>
-            <button class="icon-btn btn-download" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>Télécharger</button>
-            <button class="icon-btn btn-share" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6 15.4 6.4"/><path d="M8.6 13.4 15.4 17.6"/></svg>Partager</button>
-          </div>
-        </div>`;
-
-      card.querySelector(".fav-btn").addEventListener("click", () => toggleFavorite(doc.id));
-      card.querySelector(".btn-open").addEventListener("click", () => openDocModal(doc));
-      card.querySelector(".btn-download").addEventListener("click", () => downloadDocument(doc));
-      card.querySelector(".btn-share").addEventListener("click", () => openShareModal(doc));
-
-      docGrid.appendChild(card);
-    });
-  }
-
-  function toggleFavorite(id){
-    if (state.favorites.has(id)) state.favorites.delete(id);
-    else state.favorites.add(id);
-    document.getElementById("favCount").textContent = state.favorites.size;
-    renderDocs();
-  }
-
-  /* ================= SYNCHRO ÉTAT VISUEL DES FILTRES ================= */
-  function syncFilterUI(){
-    [...catGrid.children].forEach((btn, i) => btn.setAttribute("aria-pressed", CATEGORIES[i].id === state.activeCat));
-    [...typeChips.children].forEach(chip => chip.setAttribute("aria-pressed", chip.textContent === state.activeType));
-  }
-
-  function renderAll(){
-    syncFilterUI();
-    renderDocs();
-  }
-
-  document.getElementById("statDocs").textContent = DOCS.length;
-  renderAll();
-
-  /* ================= MODALE ================= */
-  const overlay = document.getElementById("modalOverlay");
-  const modalContent = document.getElementById("modalContent");
-  let lastFocused = null;
-
-  function openModal(html){
-    modalContent.innerHTML = html;
-    overlay.classList.add("open");
-    lastFocused = document.activeElement;
-    document.getElementById("modalClose").focus();
-    document.addEventListener("keydown", trapEsc);
-  }
-  function closeModal(){
-    overlay.classList.remove("open");
-    document.removeEventListener("keydown", trapEsc);
-    if (lastFocused) lastFocused.focus();
-  }
-  function trapEsc(e){ if (e.key === "Escape") closeModal(); }
-
-  document.getElementById("modalClose").addEventListener("click", closeModal);
-  overlay.addEventListener("click", e => { if (e.target === overlay) closeModal(); });
-
-  function openDocModal(doc){
-    let playerHtml = "";
-    
-    if (doc.type === "Vidéo") {
-      playerHtml = `
-        <div style="margin:16px 0; background:var(--violet-50); border-radius:8px; padding:12px; text-align:center;">
-          <p style="margin:0 0 12px 0; color:var(--ink-soft);">Lecteur vidéo</p>
-          <video width="100%" height="400" controls style="border-radius:4px; background:#000;">
-            <source src="${doc.url}" type="video/mp4">
-            Votre navigateur ne supporte pas la lecture vidéo.
-          </video>
-        </div>
-      `;
-    } else if (doc.type === "Audio") {
-      playerHtml = `
-        <div style="margin:16px 0; background:var(--violet-50); border-radius:8px; padding:16px;">
-          <p style="margin:0 0 12px 0; color:var(--ink-soft);">Lecteur audio</p>
-          <audio width="100%" controls style="width:100%;">
-            <source src="${doc.url}" type="audio/wav">
-            Votre navigateur ne supporte pas la lecture audio.
-          </audio>
-        </div>
-      `;
-    }
-    
-    openModal(`
-      <h2 id="modalTitle">${doc.title}</h2>
-      <p style="color:var(--ink-soft); margin-bottom:14px;">${catLabel(doc.cat)} · ${doc.type}</p>
-      ${playerHtml}
-      <p><strong>Auteur :</strong> ${doc.author}</p>
-      <p><strong>Date de publication :</strong> ${formatDate(doc.date)}</p>
-      <p><strong>Mots-clés :</strong> ${doc.kw.join(", ")}</p>
-      <div style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap;">
-        <button class="btn btn-primary" id="docDownloadBtn" type="button">⬇ Télécharger le document</button>
-        <button class="btn btn-ghost" id="docShareBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;vertical-align:middle;margin-right:6px;"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6 15.4 6.4"/><path d="M8.6 13.4 15.4 17.6"/></svg>Partager</button>
-      </div>
-    `);
-    document.getElementById("docDownloadBtn").addEventListener("click", () => downloadDocument(doc));
-    document.getElementById("docShareBtn").addEventListener("click", () => openShareModal(doc));
-  }
-
-  function openShareModal(doc){
-    const docUrl = `${window.location.origin}${window.location.pathname}?doc=${doc.id}`;
-    const docTitle = doc.title;
-    const docText = `${docTitle} - Ressource de Inclusif Connect`;
-    
-    openModal(`
-      <h2 id="modalTitle">Partager : ${docTitle}</h2>
-      <p style="color:var(--ink-soft); margin-bottom:20px;">Partagez cette ressource sur vos réseaux sociaux ou par email.</p>
-      
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
-        <button class="share-btn whatsapp-btn" type="button" id="shareWhatsApp" title="Partager sur WhatsApp">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:20px;height:20px;margin-right:8px;">
-            <path d="M17.471 16.516c-.393-.196-2.326-1.149-2.686-1.279-.373-.137-.644-.202-.917.202-.272.404-1.055 1.379-1.294 1.661-.239.282-.478.316-.871.12-.393-.197-1.656-.611-3.156-1.948-.168-.15-.266-.336-.596-.893-.271-.41 0-.884.272-1.168.27-.27.6-.704.9-1.053.3-.35.4-.593.6-.875.2-.282.1-.527-.05-.724-.15-.197-.917-2.211-1.254-3.026-.327-.776-.658-.671-.918-.671-.258 0-.558-.037-.858-.037-.3 0-.787.112-1.2.537-.414.425-1.58 1.543-1.58 3.76 0 2.218 1.618 4.368 1.844 4.684.226.315 3.169 4.847 7.674 6.79 1.072.473 1.91.756 2.563.968.887.28 1.693.24 2.331.145.71-.106 2.186-.894 2.493-1.758.307-.864.307-1.605.215-1.758-.092-.154-.338-.25-.704-.444z"/>
-          </svg>
-          WhatsApp
-        </button>
-        
-        <button class="share-btn facebook-btn" type="button" id="shareFacebook" title="Partager sur Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:20px;height:20px;margin-right:8px;">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-          </svg>
-          Facebook
-        </button>
-        
-        <button class="share-btn twitter-btn" type="button" id="shareTwitter" title="Partager sur Twitter">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:20px;height:20px;margin-right:8px;">
-            <path d="M23.953 4.57a10 10 0 002.856-3.586c-1.017.45-2.11.777-3.227.975 1.16-.694 2.048-1.793 2.465-3.101-.98.588-2.057 1.014-3.215 1.245-.93-.99-2.255-1.607-3.72-1.607-2.812 0-5.095 2.284-5.095 5.095 0 .4.045.788.137 1.162-4.23-.212-7.98-2.24-10.497-5.33-.44.753-.688 1.628-.688 2.566 0 1.768.9 3.326 2.27 4.244-.835-.027-1.62-.255-2.306-.637v.065c0 2.468 1.755 4.527 4.086 4.993-.427.116-.88.18-1.345.18-.33 0-.65-.032-.96-.093.651 2.03 2.546 3.507 4.787 3.55-1.744 1.366-3.94 2.18-6.33 2.18-.41 0-.815-.024-1.214-.071 2.278 1.459 4.982 2.31 7.882 2.31 9.458 0 14.62-7.839 14.62-14.62 0-.223-.005-.445-.014-.667.996-.721 1.86-1.625 2.544-2.655z"/>
-          </svg>
-          Twitter
-        </button>
-        
-        <button class="share-btn email-btn" type="button" id="shareEmail" title="Partager par email">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="width:20px;height:20px;margin-right:8px;">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-          </svg>
-          Email
-        </button>
-        
-        <button class="share-btn copy-btn" type="button" id="copyLink" title="Copier le lien">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="width:20px;height:20px;margin-right:8px;">
-            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-          </svg>
-          Copier le lien
-        </button>
-      </div>
-      
-      <div style="background:var(--violet-50); padding:12px; border-radius:8px; margin-top:12px;">
-        <p style="font-size:0.85rem; color:var(--ink-soft); margin:0;">
-          <strong>Lien de partage :</strong><br>
-          <code style="word-break:break-all; background:white; padding:4px; border-radius:4px; display:block; margin-top:4px;">${docUrl}</code>
-        </p>
-      </div>
-    `);
-    
-    document.getElementById("shareWhatsApp").addEventListener("click", () => {
-      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(docText + ' ' + docUrl)}`;
-      window.open(whatsappUrl, "_blank");
-      announce("Ouverture de WhatsApp pour partager la ressource.");
-    });
-    
-    document.getElementById("shareFacebook").addEventListener("click", () => {
-      const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(docUrl)}&quote=${encodeURIComponent(docText)}`;
-      window.open(facebookUrl, "_blank");
-      announce("Ouverture de Facebook pour partager la ressource.");
-    });
-    
-    document.getElementById("shareTwitter").addEventListener("click", () => {
-      const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(docUrl)}&text=${encodeURIComponent(docText)}`;
-      window.open(twitterUrl, "_blank");
-      announce("Ouverture de Twitter pour partager la ressource.");
-    });
-    
-    document.getElementById("shareEmail").addEventListener("click", () => {
-      const mailtoUrl = `mailto:?subject=${encodeURIComponent(docTitle)}&body=${encodeURIComponent(docText + ' ' + docUrl)}`;
-      window.location.href = mailtoUrl;
-      announce("Ouverture de votre client email pour partager la ressource.");
-    });
-    
-    document.getElementById("copyLink").addEventListener("click", () => {
-      navigator.clipboard.writeText(docUrl).then(() => {
-        announce("Lien copié dans le presse-papiers !");
-      }).catch(() => {
-        announce("Impossible de copier le lien. Veuillez le copier manuellement.");
-      });
-    });
-  }
-
-  function downloadDocument(doc){
-    if (!doc.url) {
-      announce("Le fichier n'est pas disponible pour ce document.");
-      return;
-    }
-    
-    const link = document.createElement("a");
-    link.href = doc.url;
-    link.download = doc.title.replace(/[^a-z0-9]/gi, '_').toLowerCase() + (doc.url.includes('.pdf') ? '.pdf' : '');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    announce(`Téléchargement de « ${doc.title} » lancé.`);
-  }
-
-  document.getElementById("btnAccount").addEventListener("click", () => {
-    openModal(`
-      <h2 id="modalTitle">Créer un compte</h2>
-      <p style="color:var(--ink-soft);">Gardez vos documents préférés et recevez les nouveautés qui vous intéressent.</p>
-      <form style="display:flex; flex-direction:column; gap:12px; margin-top:16px;">
-        <label>Nom complet<br><input type="text" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--violet-200);"></label>
-        <label>Adresse e-mail<br><input type="email" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--violet-200);"></label>
-        <button class="btn btn-primary" type="submit" style="justify-content:center;">Créer mon compte</button>
-      </form>
-    `);
-  });
-
-  document.getElementById("btnPropose").addEventListener("click", () => {
-    openModal(`
-      <h2 id="modalTitle">Proposer un document</h2>
-      <p style="color:var(--ink-soft);">Notre équipe vérifie chaque ressource avant publication.</p>
-      <form style="display:flex; flex-direction:column; gap:12px; margin-top:16px;">
-        <label>Titre du document<br><input type="text" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--violet-200);"></label>
-        <label>Thématique<br>
-          <select style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--violet-200);">
-            ${CATEGORIES.map(c => `<option>${c.label}</option>`).join("")}
-          </select>
-        </label>
-        <label>Fichier ou lien<br><input type="text" placeholder="URL ou nom du fichier" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--violet-200);"></label>
-        <button class="btn btn-primary" type="submit" style="justify-content:center;">Envoyer pour vérification</button>
-      </form>
-    `);
-  });
-
-  function showFavorites(){
-    const favDocs = DOCS.filter(d => state.favorites.has(d.id));
-    openModal(`
-      <h2 id="modalTitle">Mes favoris</h2>
-      ${favDocs.length === 0
-        ? `<p style="color:var(--ink-soft);">Vous n'avez pas encore ajouté de favoris. Cliquez sur le cœur ♡ d'une ressource pour l'ajouter ici.</p>`
-        : `<ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:12px; margin-top:14px;">
-            ${favDocs.map(d => `<li style="border:1px solid var(--violet-100); border-radius:10px; padding:12px;"><strong>${d.title}</strong><br><span style="color:var(--ink-soft); font-size:.85rem;">${catLabel(d.cat)} · ${formatDate(d.date)}</span></li>`).join("")}
-          </ul>`}
-      <p class="form-note" style="margin-top:16px;">Note : dans cette démo, les favoris ne sont pas enregistrés après un rechargement de la page.</p>
-    `);
-  }
-  document.getElementById("btnFavView").addEventListener("click", showFavorites);
-  document.getElementById("footerFav").addEventListener("click", e => { e.preventDefault(); showFavorites(); });
-  document.getElementById("footerLogin").addEventListener("click", e => { e.preventDefault(); document.getElementById("btnAccount").click(); });
-
-  document.getElementById("newsletterForm").addEventListener("submit", e => {
-    e.preventDefault();
-    announce("Merci ! Votre inscription à la lettre d'information est confirmée.");
-    e.target.reset();
-  });
-
-  /* ================= BARRE D'ACCESSIBILITÉ ================= */
-  let stepVal = 1;
-  function applyFont(){
-    document.documentElement.style.setProperty("--step", stepVal.toFixed(2));
-  }
-  document.getElementById("btnFontPlus").addEventListener("click", () => {
-    stepVal = Math.min(1.5, stepVal + 0.1); applyFont(); announce("Taille du texte augmentée.");
-  });
-  document.getElementById("btnFontMinus").addEventListener("click", () => {
-    stepVal = Math.max(0.85, stepVal - 0.1); applyFont(); announce("Taille du texte réduite.");
-  });
-  document.getElementById("btnFontReset").addEventListener("click", () => {
-    stepVal = 1; applyFont(); announce("Taille du texte réinitialisée.");
-  });
-
-  const btnContrast = document.getElementById("btnContrast");
-  btnContrast.addEventListener("click", () => {
-    const on = document.body.classList.toggle("contrast-high");
-    btnContrast.setAttribute("aria-pressed", on);
-    announce(on ? "Contraste élevé activé." : "Contraste élevé désactivé.");
-  });
-
-  const btnSpacing = document.getElementById("btnSpacing");
-  btnSpacing.addEventListener("click", () => {
-    const on = btnSpacing.getAttribute("aria-pressed") !== "true";
-    btnSpacing.setAttribute("aria-pressed", on);
-    document.documentElement.style.setProperty("--tracking", on ? "0.03em" : "0");
-    announce(on ? "Espacement du texte augmenté." : "Espacement du texte réinitialisé.");
-  });
-
-  const btnReadAloud = document.getElementById("btnReadAloud");
-  let synthUtterance = null;
-
-  function stopReading() {
-    if (window.speechSynthesis) {
-      window.speechSynthesis.cancel();
-    }
-    btnReadAloud.setAttribute("aria-pressed", "false");
-    btnReadAloud.textContent = "Lecture";
-    announce("Lecture arrêtée.");
-  }
-
-  function startReading() {
-    if (!window.speechSynthesis) {
-      announce("La lecture vocale n'est pas disponible sur ce navigateur.");
-      return;
-    }
-
-    const content = document.getElementById("contenu").innerText.trim();
-    if (!content) {
-      announce("Aucun texte disponible pour la lecture.");
-      return;
-    }
-
-    stopReading();
-    synthUtterance = new SpeechSynthesisUtterance(content);
-    synthUtterance.lang = "fr-FR";
-    synthUtterance.rate = 1;
-    synthUtterance.pitch = 1;
-    synthUtterance.onend = () => {
-      btnReadAloud.setAttribute("aria-pressed", "false");
-      btnReadAloud.textContent = "Lecture";
-      announce("Lecture terminée.");
-    };
-    window.speechSynthesis.speak(synthUtterance);
-    btnReadAloud.setAttribute("aria-pressed", "true");
-    btnReadAloud.textContent = "Arrêter";
-    announce("Lecture du texte à voix haute lancée.");
-  }
-
-  btnReadAloud.addEventListener("click", () => {
-    const isReading = btnReadAloud.getAttribute("aria-pressed") === "true";
-    if (isReading) {
-      stopReading();
-    } else {
-      startReading();
-    }
-  });
-
-})();
-</script>
+  <div role="status" class="sr-live" id="liveRegion"></div>
+  <script src="js/app.js"></script>
 </body>
 </html>
