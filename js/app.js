@@ -199,7 +199,7 @@
 
     if (auth.token && auth.user) {
       const avatarUrl = getUserAvatar();
-      accountBtn.classList.remove("btn", "btn-primary", "btn-ghost", "btn-small");
+      accountBtn.classList.remove("a11y-btn", "btn", "btn-primary", "btn-ghost", "btn-small");
       accountBtn.classList.add("profile-button");
       accountBtn.classList.remove("profile-button--guest");
       accountBtn.innerHTML = `
@@ -211,7 +211,7 @@
     } else {
       accountBtn.classList.remove("profile-button");
       accountBtn.classList.remove("profile-button--guest");
-      accountBtn.classList.add("btn", "btn-ghost", "btn-small");
+      accountBtn.classList.add("a11y-btn");
       accountBtn.innerHTML = "Créer un compte";
       if (footerLogin) footerLogin.textContent = "Se connecter";
     }

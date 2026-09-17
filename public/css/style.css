@@ -178,7 +178,13 @@ img { max-width: 100%; display: block; }
   margin-inline: auto;
   box-sizing: border-box;
 }
-.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transform: translateX(15px);
+}
 .logo-image {
   width: 170px;
   height: auto;
@@ -232,6 +238,11 @@ img { max-width: 100%; display: block; }
 .mobile-settings { display: none; }
 
 .header-actions { display: flex; gap: 10px; align-items: center; }
+#btnAccount,
+#btnFavView {
+  position: relative;
+  left: -8px;
+}
 .btn {
   font-family: inherit;
   font-weight: 700;
@@ -1015,6 +1026,8 @@ footer a:hover { color: #fff; text-decoration: underline; }
     order: 99;
     padding: 12px 18px;
     min-height: 46px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
   }
 }
 
@@ -1026,6 +1039,19 @@ footer a:hover { color: #fff; text-decoration: underline; }
   .steps,
   .feature-grid,
   .footer-grid { grid-template-columns: 1fr; }
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 6px 8px;
+    min-width: 40px;
+    min-height: 40px;
+    font-size: 1.5rem;
+    line-height: 1;
+    transform: translateX(-12px);
+  }
   .header-actions {
     gap: 8px;
   }
@@ -1059,8 +1085,10 @@ footer a:hover { color: #fff; text-decoration: underline; }
   }
   .mobile-settings-body #btnFavView {
     display: inline-flex;
-    width: 100%;
+    width: min(100%, 220px);
     margin-top: 8px;
+    margin-inline: auto;
     justify-content: center;
+    align-self: center;
   }
 }
