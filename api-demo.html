@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inclusif Connect — Demo API</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2rem;
+        background: #f7f8fa;
+        color: #1d1d1d;
+      }
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+      .card {
+        background: white;
+        padding: 1.25rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        margin-bottom: 1rem;
+      }
+      form {
+        display: grid;
+        gap: 0.75rem;
+        max-width: 380px;
+      }
+      input, button {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+      }
+      button {
+        background: #14532d;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      button.secondary {
+        background: #1f2937;
+      }
+      .row {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      pre {
+        white-space: pre-wrap;
+        background: #111827;
+        color: #e5e7eb;
+        padding: 1rem;
+        border-radius: 10px;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Inclusif Connect — Demo API</h1>
+
+      <div class="card">
+        <h2>Connexion</h2>
+        <form id="loginForm">
+          <input id="email" type="email" placeholder="Email" value="admin@inclusif-connect.org" required />
+          <input id="password" type="password" placeholder="Mot de passe" value="ChangeMoi!2026" required />
+          <button type="submit">Se connecter</button>
+        </form>
+        <p id="tokenInfo">Token : aucun</p>
+      </div>
+
+      <div class="card">
+        <h2>Actions</h2>
+        <div class="row">
+          <button class="secondary" id="loadCategoriesBtn" type="button">Charger les catégories</button>
+          <button class="secondary" id="loadDocumentsBtn" type="button">Charger les documents</button>
+          <button class="secondary" id="meBtn" type="button">Mon profil</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Réponse</h2>
+        <pre id="output">Clique sur un bouton pour voir la réponse JSON.</pre>
+      </div>
+    </div>
+
+    <script src="js/api-demo.js"></script>
+  </body>
+</html>
