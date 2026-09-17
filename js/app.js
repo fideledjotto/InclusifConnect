@@ -199,6 +199,7 @@
 
     if (auth.token && auth.user) {
       const avatarUrl = getUserAvatar();
+      accountBtn.classList.remove("btn", "btn-primary", "btn-ghost", "btn-small");
       accountBtn.classList.add("profile-button");
       accountBtn.classList.remove("profile-button--guest");
       accountBtn.innerHTML = `
@@ -210,6 +211,7 @@
     } else {
       accountBtn.classList.remove("profile-button");
       accountBtn.classList.remove("profile-button--guest");
+      accountBtn.classList.add("btn", "btn-ghost", "btn-small");
       accountBtn.innerHTML = "Créer un compte";
       if (footerLogin) footerLogin.textContent = "Se connecter";
     }
@@ -780,9 +782,16 @@
       lineSpacing.setAttribute("aria-pressed", String(lineSpacingOn));
       mobileSettingsBody.appendChild(lineSpacing);
       mobileSettingsBody.appendChild(btnFavView);
+
+      if (btnAccount.parentElement !== mainNav) {
+        mainNav.insertBefore(btnAccount, mainNav.querySelector(".mobile-settings") || null);
+      }
     } else {
       a11yBar.querySelector(".container").appendChild(a11yControls);
       headerActions.insertBefore(btnFavView, headerActions.firstElementChild);
+      if (btnAccount.parentElement === mainNav) {
+        headerActions.insertBefore(btnAccount, headerActions.lastElementChild);
+      }
     }
   }
 

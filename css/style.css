@@ -174,6 +174,8 @@ img { max-width: 100%; display: block; }
   padding: 14px 0;
   gap: 16px;
   width: 100%;
+  max-width: var(--content-max-width);
+  margin-inline: auto;
   box-sizing: border-box;
 }
 .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
@@ -201,12 +203,22 @@ img { max-width: 100%; display: block; }
 }
 .logo-text span { color: var(--violet-600); }
 
+.main-nav {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .main-nav ul {
   list-style: none;
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 22px;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 .main-nav a {
   text-decoration: none;
@@ -231,6 +243,7 @@ img { max-width: 100%; display: block; }
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 .btn-primary { background: var(--violet-700); color: var(--white); }
@@ -960,6 +973,7 @@ footer a:hover { color: #fff; text-decoration: underline; }
   .steps { grid-template-columns: 1fr 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .menu-toggle { display: inline-flex; }
+  .header-actions #btnAccount { display: none; }
   .main-nav {
     display: none;
     position: absolute;
@@ -973,7 +987,35 @@ footer a:hover { color: #fff; text-decoration: underline; }
     box-sizing: border-box;
   }
   .main-nav.is-open { display: block; }
-  .main-nav ul { flex-direction: column; gap: 12px; }
+  .main-nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .main-nav li {
+    width: 100%;
+  }
+  .main-nav a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: transparent;
+  }
+  .main-nav a:hover {
+    background: var(--violet-50);
+    border-bottom-color: transparent;
+  }
+  .main-nav #btnAccount {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 12px;
+    order: 99;
+    padding: 12px 18px;
+    min-height: 46px;
+  }
 }
 
 @media (max-width: 600px) {
