@@ -13,12 +13,12 @@
 
   const DOCS = [
     { id: 1, title: "Guide pratique de l'accessibilité numérique RGAA", type: "Guide", cat: "numerique", author: "Équipe Inclusif Connect", date: "2026-06-12", pop: 98, kw: ["RGAA", "web", "normes"], url: "documents/guide-rgaa.txt", img: "images/categories/theme-numerique.jpg" },
-    { id: 2, title: "Comprendre les troubles DYS en milieu scolaire", type: "Document", cat: "cognitif", author: "C. Amoussou", date: "2026-05-28", pop: 76, kw: ["dys", "école", "cognitif"], url: "resources/pdf/dys-scolaire.pdf", img: "images/categories/theme-cognitif.jpg" },
-    { id: 3, title: "Vidéo : se déplacer en fauteuil roulant en ville", type: "Vidéo", cat: "moteur", author: "Réseau Mobilité+", date: "2026-04-15", pop: 64, kw: ["mobilité", "fauteuil", "ville"], url: "videos /fauteuil-ville.mp4", img: "images/categories/theme-moteur.jpg" },
+    { id: 2, title: "Comprendre les troubles DYS en milieu scolaire", type: "Document", cat: "cognitif", author: "C. Amoussou", date: "2026-05-28", pop: 76, kw: ["dys", "école", "cognitif"], url: "resources/pdf/dys-scolaire.pdf", img: "images/dys2.jpg" },
+    { id: 3, title: "Vidéo : se déplacer en fauteuil roulant en ville", type: "Vidéo", cat: "moteur", author: "Réseau Mobilité+", date: "2026-04-15", pop: 64, kw: ["mobilité", "fauteuil", "ville"], url: "videos /fauteuil-ville.mp4", img: "images/fauteil-roulant.jpg" },
     { id: 4, title: "Initiation à la langue des signes (podcast)", type: "Audio", cat: "sensoriel", author: "Association Signes & Voix", date: "2026-07-02", pop: 53, kw: ["LSF", "audition"], url: "audio/lsf-podcast.mp3", img: "images/categories/theme-sensoriel.jpg" },
-    { id: 5, title: "Loi sur l'accessibilité des ERP : ce qu'il faut savoir", type: "Document", cat: "loi", author: "Ministère des Solidarités", date: "2026-03-20", pop: 120, kw: ["loi", "ERP", "droit"], url: "documents/loi-erp.pdf", img: "images/categories/theme-loi.jpg" },
+    { id: 5, title: "Loi sur l'accessibilité des ERP : ce qu'il faut savoir", type: "Document", cat: "loi", author: "Ministère des Solidarités", date: "2026-03-20", pop: 120, kw: ["loi", "ERP", "droit"], url: "documents/loi-erp.pdf", img: "images/loi2.jpg" },
     { id: 6, title: "Aménager un bâtiment accessible : guide technique", type: "Guide", cat: "batiments", author: "Ordre des architectes", date: "2026-02-18", pop: 41, kw: ["bâtiment", "normes", "travaux"], url: "documents/guide-batiment.pdf", img: "images/categories/theme-batiments.jpg" },
-    { id: 7, title: "Créer des documents accessibles avec Word", type: "Guide", cat: "numerique", author: "Équipe Inclusif Connect", date: "2026-07-20", pop: 88, kw: ["bureautique", "word", "numérique"], url: "documents/word-accessible.pdf", img: "images/categories/theme-numerique.jpg" },
+    { id: 7, title: "Créer des documents accessibles avec Word", type: "Guide", cat: "numerique", author: "Équipe Inclusif Connect", date: "2026-07-20", pop: 88, kw: ["bureautique", "word", "numérique"], url: "documents/word-accessible.pdf", img: "images/word.jpggg" },
     { id: 8, title: "Vidéo pédagogique : le braille au quotidien", type: "Vidéo", cat: "sensoriel", author: "Institut Louis Braille", date: "2026-01-30", pop: 59, kw: ["braille", "vision"], url: "videos/braille-quotidien.mp4", img: "images/categories/theme-sensoriel-braille.jpg" },
     { id: 9, title: "Outils numériques pour l'apprentissage inclusif", type: "Document", cat: "apprentissage", author: "F. Konaté", date: "2026-06-05", pop: 70, kw: ["éducation", "outils", "école"], url: "documents/outils-apprentissage.pdf", img: "images/categories/theme-apprentissage.jpg" },
     { id: 10, title: "Podcast : témoignages sur le handicap invisible", type: "Audio", cat: "cognitif", author: "Radio Inclusion", date: "2026-05-11", pop: 34, kw: ["témoignage", "invisible"], url: "audio/temoignages-invisible.mp3", img: "images/categories/theme-cognitif.jpg" },
@@ -142,7 +142,9 @@
         <div class="doc-cover">
           <img src="${doc.img}" alt="">
           <span class="type-badge">${doc.type}</span>
-          <button class="fav-btn" type="button" aria-pressed="${isFav}" aria-label="${isFav ? "Retirer des favoris" : "Ajouter aux favoris"} : ${doc.title}">${isFav ? "♥" : "♡"}</button>
+          <button class="fav-btn" type="button" aria-pressed="${isFav}" aria-label="${isFav ? "Retirer des favoris" : "Ajouter aux favoris"} : ${doc.title}">
+            <img src="${isFav ? "images/heart-filled.svg" : "images/heart-outline.svg"}" alt="" aria-hidden="true">
+          </button>
         </div>
         <div class="doc-card-body">
           <h3>${doc.title}</h3>
